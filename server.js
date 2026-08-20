@@ -11,8 +11,9 @@ const execPromise = promisify(exec);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = pathModule.dirname(__filename);
 
+const isWindows = process.platform === 'win32';
 const binDir = pathModule.join(__dirname, 'bin');
-const ytdlpPath = pathModule.join(binDir, 'yt-dlp.exe');
+const ytdlpPath = pathModule.join(binDir, isWindows ? 'yt-dlp.exe' : 'yt-dlp');
 
 // Helper to download yt-dlp binary with redirect handling
 function downloadFile(url, dest) {
@@ -44,7 +45,7 @@ function downloadFile(url, dest) {
   });
 }
 
-// Ensures yt-dlp.exe is downloaded and ready in bin/ folder
+// Ensures yt-dlp is downloaded and ready in bin/ folder
 async function ensureYtdlp() {
   if (!fs.existsSync(binDir)) {
     fs.mkdirSync(binDir, { recursive: true });
@@ -55,10 +56,18 @@ async function ensureYtdlp() {
     return;
   }
 
-  console.log('[yt-dlp] Local binary not found. Downloading the latest version from GitHub releases...');
+  const downloadUrl = isWindows
+    ? 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe'
+    : 'https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp';
+
+  console.log(`[yt-dlp] Local binary not found. Downloading the latest version for ${process.platform} from GitHub releases...`);
   try {
-    await downloadFile('https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe', ytdlpPath);
-    console.log('[yt-dlp] Download complete! Saved to bin/yt-dlp.exe');
+    await downloadFile(downloadUrl, ytdlpPath);
+    console.log(`[yt-dlp] Download complete! Saved to bin/${isWindows ? 'yt-dlp.exe' : 'yt-dlp'}`);
+    if (!isWindows) {
+      fs.chmodSync(ytdlpPath, '755');
+      console.log('[yt-dlp] Granted execute permissions (755) to the binary.');
+    }
   } catch (err) {
     console.error('[yt-dlp] Download failed:', err.message);
   }
