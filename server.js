@@ -1749,7 +1749,7 @@ async function createServer() {
   const distPath = pathModule.join(__dirname, 'dist');
   if (fs.existsSync(distPath)) {
     app.use(express.static(distPath));
-    app.get('(.*)', (req, res) => {
+    app.get('/:path*', (req, res) => {
       res.sendFile(pathModule.join(distPath, 'index.html'));
     });
   } else {
