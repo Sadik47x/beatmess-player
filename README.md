@@ -1,32 +1,24 @@
-# React + TypeScript + Vite
+# BeatMess - Personalized Music Recommendation Player
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+BeatMess is a premium React + Node.js music streaming player equipped with a custom-engineered, single-user personalized music recommendation engine, dynamic auto-refill queue, and PWA mobile installation support.
 
-Currently, two official plugins are available:
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Sadik47x/beatmess-player)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 One-Click Live Deployment
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+To deploy this application live for free:
+1. Click the **Deploy to Render** button above.
+2. Sign in to your Render account (connected to GitHub).
+3. Click **Apply** to deploy the blueprint automatically with the correct Node runtime and build configurations.
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## ✨ Features
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+* **Infinite Auto-Queue Radio:** Dynamically fetches recommendations in the background when the upcoming buffer drops below 5 tracks.
+* **Implicit Feedback Scoring:** Tracks likes, skips, partial listens, completions, and consecutive replays to shape your preference profile.
+* **Metadata Tag Cache:** Queries MusicBrainz and Last.fm in a rate-limited background worker queue and caches tags locally to optimize content-similarity.
+* **Home Page Song Exclusion:** Prevents the autoplay queue from recycling songs displayed on the Home Page rails.
+* **PWA Mobile Support:** Install directly on Android and iOS straight from your mobile browser.
