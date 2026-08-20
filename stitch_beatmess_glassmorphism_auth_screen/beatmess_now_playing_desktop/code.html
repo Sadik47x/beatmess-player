@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BeatMess - Now Playing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;800&amp;family=Hanken+Grotesk:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#d0bcff",
+                        "background": "#131318",
+                        "on-primary-fixed": "#23005c",
+                        "surface-container": "#1f1f25",
+                        "on-secondary": "#640039",
+                        "tertiary-container": "#909191",
+                        "surface-container-lowest": "#0e0e13",
+                        "outline": "#958ea0",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary-fixed-variant": "#8c0053",
+                        "primary-fixed": "#e9ddff",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed": "#ffd9e4",
+                        "surface-dim": "#131318",
+                        "tertiary-fixed": "#e2e2e2",
+                        "primary-container": "#a078ff",
+                        "surface-container-high": "#2a292f",
+                        "surface": "#131318",
+                        "surface-container-highest": "#35343a",
+                        "inverse-on-surface": "#303036",
+                        "secondary-container": "#aa0266",
+                        "inverse-surface": "#e4e1e9",
+                        "secondary-fixed-dim": "#ffb0cd",
+                        "on-secondary-fixed": "#3e0022",
+                        "on-secondary-container": "#ffbad3",
+                        "outline-variant": "#494454",
+                        "surface-container-low": "#1b1b20",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "inverse-primary": "#6d3bd7",
+                        "surface-bright": "#39383e",
+                        "secondary": "#ffb0cd",
+                        "on-tertiary-container": "#282a2a",
+                        "error": "#ffb4ab",
+                        "on-primary-container": "#340080",
+                        "tertiary": "#c6c6c7",
+                        "on-primary": "#3c0091",
+                        "on-error": "#690005",
+                        "on-tertiary": "#2f3131",
+                        "on-surface-variant": "#cbc3d7",
+                        "primary": "#d0bcff",
+                        "on-background": "#e4e1e9",
+                        "surface-tint": "#d0bcff",
+                        "error-container": "#93000a",
+                        "surface-variant": "#35343a",
+                        "on-surface": "#e4e1e9",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-primary-fixed-variant": "#5516be"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "container-max": "1440px",
+                        "margin-desktop": "48px",
+                        "split-left": "55%",
+                        "split-right": "45%",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Hanken Grotesk"],
+                        "headline-md": ["Sora"],
+                        "display-lg": ["Sora"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "display-lg-mobile": ["Sora"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "1.1", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background-color: rgba(19, 19, 24, 0.6); /* surface with opacity */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 0.5px solid rgba(255, 255, 255, 0.12);
+        }
+        .text-glow {
+            text-shadow: 0 0 15px rgba(208, 188, 255, 0.5); /* primary color glow */
+        }
+        .bg-glow {
+            box-shadow: 0 0 30px rgba(208, 188, 255, 0.2);
+        }
+        /* Custom scrollbar for queue */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface h-screen overflow-hidden flex flex-col font-body-lg">
+<!-- Blurred Background Album Art -->
+<div class="fixed inset-0 z-0">
+<div class="absolute inset-0 bg-cover bg-center opacity-30 filter blur-[80px] scale-110" data-alt="A highly blurred, abstract composition of neon pink and deep violet lights, resembling a night-time city scene. The lighting is dark and immersive with bright, vibrant glowing gradients. The overall aesthetic is sleek, futuristic, and premium, perfect for a dark-mode music player background." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAmervi00CXJ33LKZ7TrYjLbix4nDproyzr1-bg8JOt53s2WL0uI_y1yWi4_EhiE4tKIKI7PtZ36tZMhlRJR1sCWiana4PbwCgxq60SVLS-2hSObgOf-hsI9Ug5XVhyO42pWGFcHV6Rt7ZkFMng2kbsVzzBAnJ94VNei0MG_UhKofDrt6s87S-9nmlwonzAy5WpuQzv1TU6KhkM6Kaw3xU_2d9SOkzC9IaSS6rz7AoLxw-4kRTrxS-4')"></div>
+<div class="absolute inset-0 bg-background/80 mix-blend-multiply"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
+</div>
+<!-- Top Navigation (Web) -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-desktop py-4 bg-transparent backdrop-blur-xl bg-surface/10 border-b border-white/10 hidden md:flex">
+<div class="font-display-lg text-display-lg bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+            BeatMess
+        </div>
+<div class="flex space-x-8">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Explore</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Library</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Artists</a>
+</div>
+<div class="flex items-center space-x-4 text-primary dark:text-primary-fixed-dim">
+<button class="hover:text-primary transition-colors duration-300 active:scale-95 transition-transform"><span class="material-symbols-outlined">cast</span></button>
+<button class="hover:text-primary transition-colors duration-300 active:scale-95 transition-transform"><span class="material-symbols-outlined">more_vert</span></button>
+<img alt="User Avatar" class="w-10 h-10 rounded-full object-cover border border-white/20" data-alt="A small circular avatar image of a user with a neon cyberpunk aesthetic, dark background with bright magenta and purple highlights on the face." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLbd9UkUzfjBp9pt0pdf-0mVMC4qlBBkO8z4dKeF_2nFbm86htTWso1QY3gqiDLMHnXSESfqzp47q_sFoFSgwio_MHE9mguy4LT-r-GWYUM9J2ADcKdK0vVn90rEbxZEANqC4Vt9yMgljQ7JKP8-_XWC9tegEDumQ7BN-oj9WL9tQpg_YTasdL06viPZ-NnYmO47VWa1PRM73BWwUjT7KEsUZ6Vw6EOaahhFA9corDuv2ogfY6Bl6X"/>
+</div>
+</nav>
+<!-- Main Content Split -->
+<main class="relative z-10 flex h-full pt-[80px]"> <!-- pt adjusts for top nav -->
+<!-- Left Column: Player (55%) -->
+<section class="w-full md:w-[55%] flex flex-col justify-center items-center p-8 lg:p-margin-desktop">
+<!-- Album Art Container -->
+<div class="relative w-64 h-64 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px] mb-10 group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-lg opacity-20 blur-xl group-hover:opacity-30 transition-opacity duration-500"></div>
+<div class="glass-panel w-full h-full rounded-[20px] p-2 flex items-center justify-center relative overflow-hidden bg-glow shadow-2xl">
+<img alt="Neon Nights Album Art" class="w-full h-full object-cover rounded-[14px]" data-alt="A square album cover featuring a retro-futuristic synthwave landscape. Dark violet night sky with a bright glowing neon pink grid stretching towards the horizon. A stylized glowing sun is setting in the distance. High clarity, sharp details, sleek and premium dark-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDS4QBjtZdzxw6HJBbXNMcQBAgBBEgW3-L0o7D6aRvizF3hKIvOJepcO9klX4UODDUwoWjDCp-107KiayTtLS4-fkmzvhLYuJgu_rmzsoUi9tq0v9kAc_a4YXdZU4bmrZtr0IMs9Hs-CBhAxsz5zCeHX-f6Kamq_frZJnbUG1y1PH0Ok9L1qCCalhh4UlB1_LxGX4u_09c4F5Wj62zPihVJ4OgbU2cd9YlMUjgsnKiIGIBMtvEDpBn4"/>
+</div>
+</div>
+<!-- Metadata & Heart -->
+<div class="w-full max-w-md flex justify-between items-center mb-8 px-4">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface mb-1 text-glow">Neon Nights</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Neon Echo</p>
+</div>
+<button class="text-secondary hover:scale-110 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<!-- Progress Bar -->
+<div class="w-full max-w-md px-4 mb-8">
+<div class="flex justify-between font-label-caps text-label-caps text-on-surface-variant mb-2">
+<span>1:24</span>
+<span>3:45</span>
+</div>
+<div class="h-1.5 w-full bg-surface-variant rounded-full relative cursor-pointer group">
+<div class="absolute top-0 left-0 h-full w-[35%] bg-gradient-to-r from-primary to-secondary rounded-full shadow-[0_0_10px_rgba(208,188,255,0.6)]"></div>
+<div class="absolute top-1/2 left-[35%] -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-white rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+</div>
+<!-- Playback Controls -->
+<div class="w-full max-w-md px-4 flex justify-between items-center mb-8">
+<button class="text-on-surface-variant hover:text-on-surface active:scale-95 transition-all">
+<span class="material-symbols-outlined text-2xl">shuffle</span>
+</button>
+<button class="text-on-surface hover:text-primary active:scale-95 transition-all">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">skip_previous</span>
+</button>
+<button class="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-on-primary hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(208,188,255,0.4)]">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">pause</span>
+</button>
+<button class="text-on-surface hover:text-primary active:scale-95 transition-all">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">skip_next</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface active:scale-95 transition-all">
+<span class="material-symbols-outlined text-2xl">repeat</span>
+</button>
+</div>
+<!-- Bottom Utilities (Volume & Lyrics Toggle) -->
+<div class="w-full max-w-md px-4 flex justify-between items-center mt-auto pb-4">
+<div class="flex items-center space-x-3 w-1/2">
+<span class="material-symbols-outlined text-on-surface-variant text-xl">volume_up</span>
+<div class="h-1 w-full bg-surface-variant rounded-full cursor-pointer group">
+<div class="h-full w-[70%] bg-on-surface-variant rounded-full group-hover:bg-primary transition-colors"></div>
+</div>
+</div>
+<button class="glass-panel px-4 py-2 rounded-full font-label-caps text-label-caps text-on-surface flex items-center space-x-2 hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-lg">lyrics</span>
+<span>LYRICS</span>
+</button>
+</div>
+</section>
+<!-- Right Column: Side Nav / Queue (45%) -->
+<aside class="hidden md:flex flex-col h-full right-0 w-[45%] backdrop-blur-xl bg-surface-container/20 border-l border-white/10 pt-8 pb-8 px-8">
+<!-- Side Nav Tabs -->
+<div class="flex space-x-2 mb-8 border-b border-white/10 pb-4">
+<button class="font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface px-4 py-2 hover:bg-white/5 transition-all duration-300 rounded-full">
+<span class="material-symbols-outlined align-middle mr-1 text-sm">play_circle</span> Now Playing
+                </button>
+<button class="bg-gradient-to-r from-primary to-secondary text-on-primary rounded-full px-4 py-2 font-label-caps text-label-caps flex items-center shadow-[0_0_15px_rgba(208,188,255,0.3)] hover:scale-105 transition-transform">
+<span class="material-symbols-outlined align-middle mr-1 text-sm" style="font-variation-settings: 'FILL' 1;">queue_music</span> Queue
+                </button>
+<button class="font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface px-4 py-2 hover:bg-white/5 transition-all duration-300 rounded-full">
+<span class="material-symbols-outlined align-middle mr-1 text-sm">auto_awesome</span> Related
+                </button>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6">Up Next</h2>
+<!-- Queue List -->
+<div class="flex-1 overflow-y-auto pr-2 space-y-3">
+<!-- Queue Item 1 -->
+<div class="glass-panel rounded-xl p-3 flex items-center space-x-4 hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="text-on-surface-variant opacity-50 group-hover:opacity-100 cursor-grab">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<img alt="Track Art" class="w-12 h-12 rounded object-cover" data-alt="A dark synthwave album cover featuring a glowing purple wireframe mountain against a starry night sky. Small thumbnail size." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4fIaz3FnKkQfB_bxRI0wVEpID9HnDxsIpOZZ0NQ-rjLk36k7GFHLc5pnmUMLiN_5BwkPpBf19kKcg7spNk4wU5evW54DAYKWSe48XgBieLWdnOU3Jcm9MzJol2PNHm8oxS3h4mj4o5ymA957KWXcd_o88x6EK_FdCbf3yZsu_iSyX1P3MfKs4I7YaqXUQkblleKwcuwVU8Neml5YdsqSzpo5zocJ7D0MDfTuLDahDav0D7EkIYEYX"/>
+<div class="flex-1">
+<p class="font-body-lg text-body-sm text-on-surface font-semibold group-hover:text-primary transition-colors">Digital Dawn</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Synthwave Collective</p>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">4:12</span>
+</div>
+<!-- Queue Item 2 -->
+<div class="glass-panel rounded-xl p-3 flex items-center space-x-4 hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="text-on-surface-variant opacity-50 group-hover:opacity-100 cursor-grab">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<img alt="Track Art" class="w-12 h-12 rounded object-cover" data-alt="A dark synthwave album cover featuring a retro sports car driving towards a glowing neon sunset. Small thumbnail size." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgT7XeYe4ZAkqvwo0vagw6O-fAhMuz9vsKCqf_rqpYC6VUx-_ayW7VnezXDZ9yVw-e2Fjn1hI-a5YIOKdS_Hf4kbyt3DUPafN0FWEw7_FDXakdgMEluGmGAE8ogfGuvYWe8aoClf1gcxraBQ8Qu6XSU9NyCQsr1BFPcI-wxmZn5JEeUYp579kZMp875I_1FjNBstV_SiPBapq1Ui-D0d4VXzuGum3JdUUcE39GpoPsBVNHwKdlfYoy"/>
+<div class="flex-1">
+<p class="font-body-lg text-body-sm text-on-surface font-semibold group-hover:text-primary transition-colors">Midnight Drive</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Neon Echo</p>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">3:55</span>
+</div>
+<!-- Queue Item 3 -->
+<div class="glass-panel rounded-xl p-3 flex items-center space-x-4 hover:bg-white/5 transition-colors cursor-pointer group opacity-70">
+<div class="text-on-surface-variant opacity-50 group-hover:opacity-100 cursor-grab">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<img alt="Track Art" class="w-12 h-12 rounded object-cover grayscale opacity-80" data-alt="A dark abstract album cover featuring glowing pink and blue concentric circles over a deep space background. Small thumbnail size." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbOGiyBh7bTGFx7ZcKtDqcT6wQvcHW07iaF-cE2LjxINwo2_29-Bfs_2RZD7WVFanYS2N1LJY6M2USGLJm2QEPPilh7m65C7Y41sf_p1QSreK97PWcFWV7zeGjNj2DnqqS3MZYMdXwiyO-fQreIpwQyHwhM7T0qbu_6A0HZlSAzjJYymw8A0O-GnzKjMZuPb-kkaB9Eq8UyrddihOgApnwr8Q9cpEo6D3R_4imwOEmvFjNDUh2IniX"/>
+<div class="flex-1">
+<p class="font-body-lg text-body-sm text-on-surface font-semibold group-hover:text-primary transition-colors">Cybernetic Pulse</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Vapor Trails</p>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">5:01</span>
+</div>
+<!-- Queue Item 4 -->
+<div class="glass-panel rounded-xl p-3 flex items-center space-x-4 hover:bg-white/5 transition-colors cursor-pointer group opacity-70">
+<div class="text-on-surface-variant opacity-50 group-hover:opacity-100 cursor-grab">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<img alt="Track Art" class="w-12 h-12 rounded object-cover grayscale opacity-80" data-alt="A dark album cover featuring a glowing neon city skyline reflected in water. Purple and blue hues. Small thumbnail size." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASHjFvaKdWbjKmsm89mH3y7PutN4QvBNZHBq3Ecu1Sx4hdAoXj_vA4qrMxaj2S1qnMjWNZ2xhlKEzZPxlKiFfGThAmZJihwL2CuuTf_3O2oiBpnlQdb0Dij_aTN4HwMKKuSGVS35lyyoW-Xaog4dAUe3K1q7qXYvL4QuUlRRkQ9JBnwqkK9S5tvznIutlvKRQSyyZGOEKy369tyREx9EKxUPQkTHlcg44YMS4ClxLrWia2l6PxBNM9"/>
+<div class="flex-1">
+<p class="font-body-lg text-body-sm text-on-surface font-semibold group-hover:text-primary transition-colors">Electric Rain</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">The Night Runners</p>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">3:30</span>
+</div>
+</div>
+</aside>
+</main>
+<!-- Bottom Nav (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-6 pt-3 backdrop-blur-2xl bg-surface-container-highest/30 border-t border-white/12 shadow-2xl rounded-t-lg">
+<a class="flex flex-col items-center justify-center bg-gradient-to-tr from-primary to-secondary text-white rounded-xl p-2 active:scale-90 transition-all duration-200 shadow-[0_0_15px_rgba(208,188,255,0.4)]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">music_note</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Player</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 p-2 hover:bg-white/10 active:scale-90 transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 p-2 hover:bg-white/10 active:scale-90 transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">library_music</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant/70 p-2 hover:bg-white/10 active:scale-90 transition-all duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps-mobile text-label-caps-mobile mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BeatMess - Search</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=Sora:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-variant": "#35343a",
+                        "surface-container-high": "#2a292f",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary-fixed-dim": "#d0bcff",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-container-lowest": "#0e0e13",
+                        "on-secondary-fixed-variant": "#8c0053",
+                        "on-surface-variant": "#cbc3d7",
+                        "on-secondary": "#640039",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-primary-container": "#340080",
+                        "surface-tint": "#d0bcff",
+                        "inverse-surface": "#e4e1e9",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#35343a",
+                        "primary": "#d0bcff",
+                        "error-container": "#93000a",
+                        "background": "#131318",
+                        "outline-variant": "#494454",
+                        "secondary-fixed": "#ffd9e4",
+                        "on-tertiary-container": "#282a2a",
+                        "secondary": "#ffb0cd",
+                        "secondary-fixed-dim": "#ffb0cd",
+                        "on-tertiary": "#2f3131",
+                        "surface-bright": "#39383e",
+                        "on-secondary-container": "#ffbad3",
+                        "surface": "#131318",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#aa0266",
+                        "primary-container": "#a078ff",
+                        "on-primary-fixed-variant": "#5516be",
+                        "outline": "#958ea0",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "primary-fixed": "#e9ddff",
+                        "on-background": "#e4e1e9",
+                        "tertiary-container": "#909191",
+                        "surface-container": "#1f1f25",
+                        "on-secondary-fixed": "#3e0022",
+                        "inverse-on-surface": "#303036",
+                        "on-primary-fixed": "#23005c",
+                        "inverse-primary": "#6d3bd7",
+                        "on-primary": "#3c0091",
+                        "surface-container-low": "#1b1b20",
+                        "on-error": "#690005",
+                        "surface-dim": "#131318",
+                        "tertiary": "#c6c6c7",
+                        "on-surface": "#e4e1e9"
+                    },
+                    borderRadius: {
+                        DEFAULT: "1rem",
+                        lg: "2rem",
+                        xl: "3rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        "margin-desktop": "48px",
+                        "split-right": "45%",
+                        "gutter": "24px",
+                        "split-left": "55%",
+                        "margin-mobile": "20px",
+                        "container-max": "1440px"
+                    },
+                    fontFamily: {
+                        "display-lg": ["Sora"],
+                        "display-lg-mobile": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "label-caps": ["Hanken Grotesk"]
+                    },
+                    fontSize: {
+                        "display-lg": ["48px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "800" }],
+                        "display-lg-mobile": ["36px", { lineHeight: "1.1", fontWeight: "800" }],
+                        "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
+                        "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+                        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "label-caps": ["12px", { lineHeight: "1", letterSpacing: "0.1em", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Hide scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen selection:bg-primary/30 selection:text-primary">
+<!-- SideNavBar (from JSON) -->
+<nav class="bg-white/5 backdrop-blur-[20px] h-full w-[280px] fixed left-0 top-0 border-r-[0.5px] border-white/12 flex flex-col p-gutter z-40">
+<!-- Brand -->
+<div class="mb-12 flex items-center gap-4 px-4 pt-4">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-background" style="font-variation-settings: 'FILL' 1;">graphic_eq</span>
+</div>
+<div>
+<h1 class="font-display-lg text-[24px] leading-none bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">BeatMess</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-1">Premium Member</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 flex flex-col gap-2">
+<!-- Home -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-white/10 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="font-body-lg text-body-lg">Home</span>
+</a>
+<!-- Explore (ACTIVE) -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl bg-gradient-to-r from-primary/20 to-secondary/20 border-r-4 border-primary text-on-surface font-bold hover:bg-white/10 transition-colors scale-95 duration-200" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="font-body-lg text-body-lg text-primary">Explore</span>
+</a>
+<!-- Library -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-white/10 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">library_music</span>
+<span class="font-body-lg text-body-lg">Library</span>
+</a>
+<!-- Premium -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-white/10 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">workspace_premium</span>
+<span class="font-body-lg text-body-lg">Premium</span>
+</a>
+</div>
+<!-- CTA -->
+<div class="mt-auto pt-8">
+<button class="w-full py-4 px-6 rounded-full bg-gradient-to-r from-primary to-secondary text-background font-bold font-body-lg transition-transform hover:scale-[1.02] active:scale-95 shadow-[0_0_20px_rgba(208,188,255,0.15)]">
+                Upgrade to Pro
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] pb-[100px] min-h-screen px-margin-desktop py-12 relative overflow-hidden">
+<!-- Subtle background glowing orbs -->
+<div class="absolute top-0 left-[20%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="absolute bottom-[20%] right-0 w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="max-w-container-max mx-auto relative z-10">
+<!-- Search Bar -->
+<div class="w-full max-w-3xl mx-auto mb-16 relative group">
+<div class="absolute inset-0 bg-primary/20 rounded-[24px] blur-xl opacity-0 group-focus-within:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+<div class="relative bg-white/[0.06] backdrop-blur-[20px] border-[0.5px] border-white/12 rounded-[24px] flex items-center px-6 py-4 focus-within:border-primary focus-within:shadow-[0_0_15px_rgba(208,188,255,0.2)] transition-all duration-300">
+<span class="material-symbols-outlined text-[28px] text-on-surface-variant mr-4">search</span>
+<input autofocus="" class="w-full bg-transparent border-none focus:ring-0 text-on-surface font-body-lg text-body-lg placeholder:text-on-surface-variant/50 p-0" placeholder="Search songs, artists, albums..." type="text"/>
+<button class="ml-4 p-2 rounded-full hover:bg-white/10 text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">mic</span>
+</button>
+</div>
+</div>
+<!-- Recent Searches -->
+<section class="mb-16 animate-[fadeIn_0.5s_ease-out]">
+<h2 class="font-headline-md text-headline-md mb-6">Recent Searches</h2>
+<div class="flex flex-wrap gap-4">
+<!-- Chip 1 -->
+<div class="group flex items-center gap-3 bg-white/[0.06] backdrop-blur-[20px] border-[0.5px] border-white/12 rounded-full px-5 py-2.5 hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">history</span>
+<span class="font-body-sm text-body-sm text-on-surface">Midnight Echoes</span>
+<button class="w-5 h-5 rounded-full flex items-center justify-center hover:bg-white/20 text-on-surface-variant group-hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+<!-- Chip 2 -->
+<div class="group flex items-center gap-3 bg-white/[0.06] backdrop-blur-[20px] border-[0.5px] border-white/12 rounded-full px-5 py-2.5 hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">history</span>
+<span class="font-body-sm text-body-sm text-on-surface">Neon Void</span>
+<button class="w-5 h-5 rounded-full flex items-center justify-center hover:bg-white/20 text-on-surface-variant group-hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+<!-- Chip 3 -->
+<div class="group flex items-center gap-3 bg-white/[0.06] backdrop-blur-[20px] border-[0.5px] border-white/12 rounded-full px-5 py-2.5 hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">history</span>
+<span class="font-body-sm text-body-sm text-on-surface">Lofi Beats</span>
+<button class="w-5 h-5 rounded-full flex items-center justify-center hover:bg-white/20 text-on-surface-variant group-hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Browse Categories Grid -->
+<section class="animate-[fadeIn_0.7s_ease-out]">
+<h2 class="font-headline-md text-headline-md mb-8">Browse Categories</h2>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Tile 1: Bollywood -->
+<div class="relative group cursor-pointer h-48 rounded-[24px] overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-error/40 to-secondary-container/40 z-0 opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"></div>
+<div class="absolute inset-0 bg-white/[0.06] backdrop-blur-[20px] border-[0.5px] border-white/12 z-10 transition-all group-hover:bg-white/[0.08]"></div>
+<div class="relative z-20 h-full p-6 flex flex-col justify-between">
+<h3 class="font-headline-md text-[20px] font-bold text-on-surface drop-shadow-md">Bollywood</h3>
+<div class="self-end w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 transform rotate-12 group-hover:rotate-0 transition-transform duration-300">
+<span class="material-symbols-outlined text-[24px] text-white" style="font-variation-settings: 'FILL' 1;">movie</span>
+</div>
+</div>
+</div>
+<!-- Tile 2: Pop -->
+<div class="relative group cursor-pointer h-48 rounded-[24px] overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/40 to-inverse-primary/40 z-0 opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"></div>
+<div class="absolute inset-0 bg-white/[0.06] backdrop-blur-[20px] border-[0.5px] border-white/12 z-10 transition-all group-hover:bg-white/[0.08]"></div>
+<div class="relative z-20 h-full p-6 flex flex-col justify-between">
+<h3 class="font-headline-md text-[20px] font-bold text-on-surface drop-shadow-md">Pop</h3>
+<div class="self-end w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 transform -rotate-12 group-hover:rotate-0 transition-transform duration-300">
+<span class="material-symbols-outlined text-[24px] text-white" style="font-variation-settings: 'FILL' 1;">mic_external_on</span>
+</div>
+</div>
+</div>
+<!-- Tile 3: Lofi -->
+<div class="relative group cursor-pointer h-48 rounded-[24px] overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-tertiary/40 to-[#4a6b82]/40 z-0 opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"></div>
+<div class="absolute inset-0 bg-white/[0.06] backdrop-blur-[20px] border-[0.5px] border-white/12 z-10 transition-all group-hover:bg-white/[0.08]"></div>
+<div class="relative z-20 h-full p-6 flex flex-col justify-between">
+<h3 class="font-headline-md text-[20px] font-bold text-on-surface drop-shadow-md">Lofi</h3>
+<div class="self-end w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 transform rotate-12 group-hover:rotate-0 transition-transform duration-300">
+<span class="material-symbols-outlined text-[24px] text-white" style="font-variation-settings: 'FILL' 1;">headphones</span>
+</div>
+</div>
+</div>
+<!-- Tile 4: Workout -->
+<div class="relative group cursor-pointer h-48 rounded-[24px] overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-secondary/40 to-error-container/40 z-0 opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"></div>
+<div class="absolute inset-0 bg-white/[0.06] backdrop-blur-[20px] border-[0.5px] border-white/12 z-10 transition-all group-hover:bg-white/[0.08]"></div>
+<div class="relative z-20 h-full p-6 flex flex-col justify-between">
+<h3 class="font-headline-md text-[20px] font-bold text-on-surface drop-shadow-md">Workout</h3>
+<div class="self-end w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 transform -rotate-12 group-hover:rotate-0 transition-transform duration-300">
+<span class="material-symbols-outlined text-[24px] text-white" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+</div>
+</div>
+</div>
+<!-- Tile 5: Podcasts -->
+<div class="relative group cursor-pointer h-48 rounded-[24px] overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-outline/40 to-surface-variant/60 z-0 opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"></div>
+<div class="absolute inset-0 bg-white/[0.06] backdrop-blur-[20px] border-[0.5px] border-white/12 z-10 transition-all group-hover:bg-white/[0.08]"></div>
+<div class="relative z-20 h-full p-6 flex flex-col justify-between">
+<h3 class="font-headline-md text-[20px] font-bold text-on-surface drop-shadow-md">Podcasts</h3>
+<div class="self-end w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 transform rotate-12 group-hover:rotate-0 transition-transform duration-300">
+<span class="material-symbols-outlined text-[24px] text-white" style="font-variation-settings: 'FILL' 1;">podcasts</span>
+</div>
+</div>
+</div>
+<!-- Tile 6: Charts -->
+<div class="relative group cursor-pointer h-48 rounded-[24px] overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-inverse-primary/40 to-primary-container/40 z-0 opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"></div>
+<div class="absolute inset-0 bg-white/[0.06] backdrop-blur-[20px] border-[0.5px] border-white/12 z-10 transition-all group-hover:bg-white/[0.08]"></div>
+<div class="relative z-20 h-full p-6 flex flex-col justify-between">
+<h3 class="font-headline-md text-[20px] font-bold text-on-surface drop-shadow-md">Charts</h3>
+<div class="self-end w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 transform -rotate-12 group-hover:rotate-0 transition-transform duration-300">
+<span class="material-symbols-outlined text-[24px] text-white" style="font-variation-settings: 'FILL' 1;">equalizer</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Mini-Player -->
+<div class="fixed bottom-0 left-[280px] right-0 h-[90px] bg-white/[0.06] backdrop-blur-[20px] border-t-[0.5px] border-white/12 z-50 flex items-center justify-between px-8">
+<!-- Track Info -->
+<div class="flex items-center gap-4 w-[30%]">
+<img class="w-14 h-14 rounded-lg object-cover shadow-lg" data-alt="A macro, ultra-high resolution shot of abstract vinyl record grooves reflecting neon violet and pink studio lighting. The aesthetic is extremely dark, moody, and premium, fitting a luxury music application's album art placeholder." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGBi2VVDzer4NwEzPfxf0g_FxuIPTDppJtOkJTqZSFp-8RYUlWnGQODj5YA1P6AOyiuUxmOpBWkiUisdA-C9hfyc0xSSPhQ9RmM6jbSYlXkXsbmUAWmjakKFWKPu85Vpy7URMU3N7Nyu6MW7no_phAitticlPPRhiokTAFrwebOwTpGvD0HSLTDBKsK21fpZBEhINAc544jEOb4gZGdpc2hvOKBkyzuKPuLGXxMd0N2CODam6cvQhE"/>
+<div class="flex flex-col">
+<span class="font-body-lg font-semibold text-on-surface truncate">Select a track</span>
+<span class="font-body-sm text-on-surface-variant truncate">To start listening</span>
+</div>
+<button class="ml-4 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+<!-- Controls -->
+<div class="flex flex-col items-center w-[40%] max-w-md">
+<div class="flex items-center gap-6 mb-2">
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]">shuffle</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">skip_previous</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-white text-background flex items-center justify-center hover:scale-105 transition-transform shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">skip_next</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]">repeat</span>
+</button>
+</div>
+<!-- Progress Bar -->
+<div class="w-full flex items-center gap-3">
+<span class="font-label-caps text-on-surface-variant text-[10px]">0:00</span>
+<div class="h-1.5 flex-1 bg-white/10 rounded-full overflow-hidden cursor-pointer group">
+<div class="h-full w-[0%] bg-gradient-to-r from-primary to-secondary rounded-full group-hover:bg-primary transition-colors relative">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover:opacity-100 shadow-md"></div>
+</div>
+</div>
+<span class="font-label-caps text-on-surface-variant text-[10px]">0:00</span>
+</div>
+</div>
+<!-- Extra Controls -->
+<div class="flex items-center justify-end gap-4 w-[30%]">
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]">queue_music</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]">devices</span>
+</button>
+<div class="flex items-center gap-2 w-24">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant">volume_up</span>
+<div class="h-1.5 flex-1 bg-white/10 rounded-full cursor-pointer group">
+<div class="h-full w-[70%] bg-on-surface-variant rounded-full group-hover:bg-primary transition-colors"></div>
+</div>
+</div>
+</div>
+</div>
+<style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</body></html>

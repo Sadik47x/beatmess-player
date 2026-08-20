@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BeatMess - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=Sora:wght@100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed-variant": "#5516be",
+                      "on-tertiary": "#2f3131",
+                      "surface-variant": "#35343a",
+                      "surface-container-low": "#1b1b20",
+                      "surface-tint": "#d0bcff",
+                      "surface-container": "#1f1f25",
+                      "outline": "#958ea0",
+                      "on-primary-container": "#340080",
+                      "on-secondary-fixed": "#3e0022",
+                      "surface-container-high": "#2a292f",
+                      "tertiary": "#c6c6c7",
+                      "surface": "#131318",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "primary-container": "#a078ff",
+                      "inverse-surface": "#e4e1e9",
+                      "tertiary-container": "#909191",
+                      "on-surface": "#e4e1e9",
+                      "primary-fixed-dim": "#d0bcff",
+                      "secondary-container": "#aa0266",
+                      "primary-fixed": "#e9ddff",
+                      "on-error": "#690005",
+                      "on-secondary": "#640039",
+                      "surface-bright": "#39383e",
+                      "surface-container-lowest": "#0e0e13",
+                      "outline-variant": "#494454",
+                      "error-container": "#93000a",
+                      "secondary-fixed": "#ffd9e4",
+                      "inverse-on-surface": "#303036",
+                      "on-primary-fixed": "#23005c",
+                      "on-primary": "#3c0091",
+                      "secondary": "#ffb0cd",
+                      "on-surface-variant": "#cbc3d7",
+                      "inverse-primary": "#6d3bd7",
+                      "on-secondary-container": "#ffbad3",
+                      "tertiary-fixed": "#e2e2e2",
+                      "surface-container-highest": "#35343a",
+                      "on-background": "#e4e1e9",
+                      "on-tertiary-container": "#282a2a",
+                      "error": "#ffb4ab",
+                      "on-error-container": "#ffdad6",
+                      "secondary-fixed-dim": "#ffb0cd",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "background": "#131318",
+                      "on-secondary-fixed-variant": "#8c0053",
+                      "surface-dim": "#131318",
+                      "primary": "#d0bcff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "split-right": "45%",
+                      "container-max": "1440px",
+                      "split-left": "55%",
+                      "gutter": "24px",
+                      "margin-desktop": "48px",
+                      "margin-mobile": "20px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "display-lg": [
+                              "Sora"
+                      ],
+                      "display-lg-mobile": [
+                              "Sora"
+                      ],
+                      "body-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-md": [
+                              "Sora"
+                      ],
+                      "label-caps": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "36px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-sm h-screen overflow-hidden flex flex-col md:flex-row">
+<nav class="hidden md:flex flex-col h-full py-8 px-6 bg-surface/10 text-primary font-body-lg text-body-lg w-[240px] flex-shrink-0 border-r border-white/12 backdrop-blur-[20px] transition-all duration-300 ease-in-out">
+<div class="mb-12">
+<h1 class="font-display-lg text-headline-md bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">BeatMess</h1>
+</div>
+<ul class="flex-1 space-y-2">
+<li>
+<a class="flex items-center space-x-4 py-3 px-4 rounded-lg bg-gradient-to-r from-primary/20 to-secondary/20 border-l-4 border-primary text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span>Home</span>
+</a>
+</li>
+<li>
+<a class="flex items-center space-x-4 py-3 px-4 rounded-lg text-on-surface-variant hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span>Explore</span>
+</a>
+</li>
+<li>
+<a class="flex items-center space-x-4 py-3 px-4 rounded-lg text-on-surface-variant hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined">library_music</span>
+<span>Library</span>
+</a>
+</li>
+<li>
+<a class="flex items-center space-x-4 py-3 px-4 rounded-lg text-on-surface-variant hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined">workspace_premium</span>
+<span>Premium</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto flex items-center space-x-3 pt-6 border-t border-white/12">
+<img class="w-10 h-10 rounded-full object-cover border border-white/12" data-alt="A futuristic, dark-mode inspired portrait of a user named Alex Rivera. The portrait should have neon purple and pink lighting reflecting off their face, set against a dark void background to match the music platform's aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSkDYvPLsSNACGSkCV0_b7fDspHdfNK9Je2FhjkDb__fCwLz-8KruDEwwxWO3eg6lWjy_3axkLxdRflKEZPqMouxP5GiWxJpDK_rVnX4m2-nRh2qe_ThANYxL5UYdmssQ1J51vj3uNyLwzr7FtnCLr6S3JA4h6bf-aTuyLR2RNnQghovRWemPLpEtz1CPsT5r11lIV4DgYIb0oi85baFaibylhqszCgoJBMxM96llAEnNYvlKJk2qs"/>
+<div>
+<p class="font-body-lg text-body-sm font-semibold text-on-background">Alex Rivera</p>
+<p class="font-body-sm text-[12px] text-on-surface-variant">Premium Member</p>
+</div>
+</div>
+</nav>
+<main class="flex-1 flex flex-col h-full overflow-y-auto relative pb-24 md:pb-0">
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 bg-transparent text-primary font-display-lg text-display-lg-mobile md:text-display-lg backdrop-blur-xl bg-surface/10 border-b border-white/12 md:hidden">
+<h1 class="text-headline-md font-display-lg bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">BeatMess</h1>
+</header>
+<div class="flex-1 p-margin-mobile md:p-margin-desktop pt-24 md:pt-margin-desktop pb-32">
+<div class="w-full h-full bg-white/[0.03] backdrop-blur-[20px] rounded-[24px] border border-white/12 flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[120px]">graphic_eq</span>
+</div>
+<div class="text-center z-10 p-8">
+<p class="font-body-lg text-headline-md text-on-surface-variant">Content Canvas</p>
+</div>
+</div>
+</div>
+</main>
+<div class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-safe pt-2 md:hidden bg-surface/10 text-primary font-label-caps text-label-caps rounded-t-lg backdrop-blur-[20px] border-t border-white/12">
+<a class="flex flex-col items-center justify-center bg-gradient-to-r from-primary to-secondary text-on-primary rounded-full px-4 py-1 active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="mt-1">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">subscriptions</span>
+<span class="mt-1">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="mt-1">Profile</span>
+</a>
+</div>
+<div class="hidden md:flex fixed bottom-0 w-[calc(100%-240px)] left-[240px] z-40 bg-surface-container-high/60 backdrop-blur-[30px] border-t border-white/12 px-6 py-4 items-center justify-between">
+<div class="flex items-center space-x-4 w-1/4">
+<img class="w-14 h-14 rounded-lg object-cover border border-white/12" data-alt="Abstract dark synthwave album art. Deep violet and neon pink geometric shapes reflecting on a glossy black surface. High contrast, moody, futuristic aesthetic matching the music platform style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAtAtvClR-6P1gjA8qlT5b8lA8dJFLdOc6D9KibpQ4b4QcktBHHhu93IWmIyQhZeE8g-vc6Iz6FGWCnABu_-3lcBtPRFdi--G3yCPmuVTci4B-i5mJwEsJTPWjAoiDezKvXy5DPVyJZGEWbV0vElFOmBVC8-ZwzZ-ZGGMu6VHc6z6fL15erx4NH9e2wUa5IoNMrNWaC69Usj6GqE7B-BpCk_8DRQp2Fpu3513IBam_-xVpOBVSx7ee"/>
+<div>
+<p class="font-body-sm font-semibold text-on-background">Neon Nights</p>
+<p class="font-body-sm text-[12px] text-on-surface-variant">Neon Echo</p>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+<div class="flex-1 max-w-2xl px-8 flex flex-col items-center space-y-2">
+<div class="flex items-center space-x-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">shuffle</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">skip_previous</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary hover:scale-105 transition-transform shadow-[0_0_15px_rgba(208,188,255,0.3)]">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">skip_next</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">repeat</span>
+</button>
+</div>
+<div class="w-full flex items-center space-x-3 text-[12px] text-on-surface-variant font-label-caps">
+<span>1:24</span>
+<div class="flex-1 h-1 bg-white/10 rounded-full overflow-hidden">
+<div class="w-1/3 h-full bg-gradient-to-r from-primary to-secondary rounded-full relative shadow-[0_0_10px_rgba(208,188,255,0.5)]"></div>
+</div>
+<span>3:45</span>
+</div>
+</div>
+<div class="flex items-center justify-end space-x-4 w-1/4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">volume_up</span>
+</button>
+<div class="w-24 h-1 bg-white/10 rounded-full overflow-hidden">
+<div class="w-2/3 h-full bg-primary rounded-full"></div>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors ml-4">
+<span class="material-symbols-outlined text-[20px]">open_in_full</span>
+</button>
+</div>
+</div>
+</body></html>

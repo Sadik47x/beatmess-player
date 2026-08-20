@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>BeatMess - Mobile Shell</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700&amp;family=Sora:wght@600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#5516be",
+                        "on-tertiary": "#2f3131",
+                        "surface-variant": "#35343a",
+                        "surface-container-low": "#1b1b20",
+                        "surface-tint": "#d0bcff",
+                        "surface-container": "#1f1f25",
+                        "outline": "#958ea0",
+                        "on-primary-container": "#340080",
+                        "on-secondary-fixed": "#3e0022",
+                        "surface-container-high": "#2a292f",
+                        "tertiary": "#c6c6c7",
+                        "surface": "#131318",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "primary-container": "#a078ff",
+                        "inverse-surface": "#e4e1e9",
+                        "tertiary-container": "#909191",
+                        "on-surface": "#e4e1e9",
+                        "primary-fixed-dim": "#d0bcff",
+                        "secondary-container": "#aa0266",
+                        "primary-fixed": "#e9ddff",
+                        "on-error": "#690005",
+                        "on-secondary": "#640039",
+                        "surface-bright": "#39383e",
+                        "surface-container-lowest": "#0e0e13",
+                        "outline-variant": "#494454",
+                        "error-container": "#93000a",
+                        "secondary-fixed": "#ffd9e4",
+                        "inverse-on-surface": "#303036",
+                        "on-primary-fixed": "#23005c",
+                        "on-primary": "#3c0091",
+                        "secondary": "#ffb0cd",
+                        "on-surface-variant": "#cbc3d7",
+                        "inverse-primary": "#6d3bd7",
+                        "on-secondary-container": "#ffbad3",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-container-highest": "#35343a",
+                        "on-background": "#e4e1e9",
+                        "on-tertiary-container": "#282a2a",
+                        "error": "#ffb4ab",
+                        "on-error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#ffb0cd",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "background": "#131318",
+                        "on-secondary-fixed-variant": "#8c0053",
+                        "surface-dim": "#131318",
+                        "primary": "#d0bcff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "split-right": "45%",
+                        "container-max": "1440px",
+                        "split-left": "55%",
+                        "gutter": "24px",
+                        "margin-desktop": "48px",
+                        "margin-mobile": "20px",
+                        "safe": "env(safe-area-inset-bottom, 20px)"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Hanken Grotesk"],
+                        "display-lg": ["Sora"],
+                        "display-lg-mobile": ["Sora"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "headline-md": ["Sora"],
+                        "label-caps": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "1.1", "fontWeight": "800" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background-color: rgba(19, 19, 24, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 0.5px solid rgba(255, 255, 255, 0.12);
+        }
+        /* Custom scrollbar for webkit to hide it but keep functionality */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col relative overflow-hidden font-body-sm">
+<!-- Top App Bar (Mobile View Placeholder) -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile py-4 glass-panel border-b-0 shadow-none">
+<h1 class="text-headline-md font-display-lg bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">BeatMess</h1>
+<button class="text-primary hover:opacity-80 transition-opacity scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" style="font-size: 28px;">more_vert</span>
+</button>
+</header>
+<!-- Main Canvas Area -->
+<main class="flex-1 overflow-y-auto pt-[80px] pb-[160px] px-margin-mobile">
+<div class="h-[120vh] flex flex-col items-center justify-center border-2 border-dashed border-white/10 rounded-xl bg-surface/30">
+<span class="material-symbols-outlined text-[64px] text-white/20 mb-4">music_note</span>
+<p class="font-body-lg text-body-lg text-on-surface-variant text-center max-w-xs">
+                Main content canvas. Scroll down to see floating chrome overlay.
+            </p>
+</div>
+</main>
+<!-- Floating Navigation Chrome Container -->
+<div class="fixed bottom-0 left-0 w-full z-50 px-margin-mobile pb-safe pt-2 md:hidden pointer-events-none flex flex-col gap-2">
+<!-- Floating Mini Player -->
+<div class="glass-panel w-full rounded-full flex items-center p-2 pr-4 pointer-events-auto relative overflow-hidden shadow-lg shadow-black/50">
+<!-- Progress Line Top Edge -->
+<div class="absolute top-0 left-0 h-[2px] bg-gradient-to-r from-primary to-secondary w-[45%]"></div>
+<div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border border-white/10">
+<img alt="Album Art" class="w-full h-full object-cover" data-alt="Abstract neon digital art suitable for a synthwave album cover, dark background with vibrant magenta and cyan glowing lines forming geometric shapes, high contrast, sleek aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9ArWNiNn0XuDiGDhLmqOupqw5UMkEgMPErFScxPSVunjv-HQFdnRRl52bpY7IPsxfYK5apqh9lCw1zSJO0XzTTfiMKJfPmxFnI9cgL1j0BfuKGTYCM_kyxIGRL2H2g6laJbS9p4EpOvduvJVwe2Qzz3UbI4OplEz8_UFM-RZx3ziOJdB_8fNR4LH_DVb4vT8i8R7uokJU3oB11vk6Qq81wy0nMdXddYP6Ep3QeYw8pFPU5YbPqwAf"/>
+</div>
+<div class="ml-3 flex-1 overflow-hidden flex flex-col justify-center">
+<div class="font-body-sm text-body-sm text-on-surface truncate font-semibold">Neon Nights</div>
+<div class="font-label-caps text-[10px] text-on-surface-variant truncate">Neon Echo</div>
+</div>
+<div class="flex items-center gap-3 text-primary">
+<button class="active:scale-90 transition-transform flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+</div>
+<!-- Bottom Tab Bar (Floating Pill) -->
+<nav class="glass-panel w-full rounded-full flex justify-around items-center py-2 px-2 pointer-events-auto shadow-xl shadow-black/80">
+<!-- Home (Active) -->
+<a class="flex flex-col items-center justify-center w-14 h-14 rounded-full bg-surface/20 active:scale-95 duration-200 transition-all group relative overflow-hidden" href="#">
+<div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary z-10" style="font-variation-settings: 'FILL' 1; font-size: 28px;">home</span>
+<span class="font-label-caps text-[9px] mt-1 text-primary z-10 tracking-wider">HOME</span>
+</a>
+<!-- Search -->
+<a class="flex flex-col items-center justify-center w-14 h-14 rounded-full text-on-surface-variant hover:text-primary active:scale-95 duration-200 transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-size: 26px;">search</span>
+<span class="font-label-caps text-[9px] mt-1 tracking-wider opacity-80">SEARCH</span>
+</a>
+<!-- Library -->
+<a class="flex flex-col items-center justify-center w-14 h-14 rounded-full text-on-surface-variant hover:text-primary active:scale-95 duration-200 transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-size: 26px;">subscriptions</span>
+<span class="font-label-caps text-[9px] mt-1 tracking-wider opacity-80">LIBRARY</span>
+</a>
+<!-- Settings -->
+<a class="flex flex-col items-center justify-center w-14 h-14 rounded-full text-on-surface-variant hover:text-primary active:scale-95 duration-200 transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-size: 26px;">person</span>
+<span class="font-label-caps text-[9px] mt-1 tracking-wider opacity-80">PROFILE</span>
+</a>
+</nav>
+</div>
+</body></html>

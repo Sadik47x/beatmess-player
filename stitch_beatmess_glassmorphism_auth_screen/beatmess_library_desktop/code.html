@@ -1,0 +1,296 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>BeatMess - Your Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&amp;family=Hanken+Grotesk:wght@400;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline-variant": "#494454",
+                        "inverse-primary": "#6d3bd7",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface-container-low": "#1b1b20",
+                        "primary-container": "#a078ff",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-primary": "#3c0091",
+                        "surface-dim": "#131318",
+                        "inverse-surface": "#e4e1e9",
+                        "background": "#131318",
+                        "on-error": "#690005",
+                        "on-secondary-container": "#ffbad3",
+                        "on-primary-fixed-variant": "#5516be",
+                        "surface-container": "#1f1f25",
+                        "surface-bright": "#39383e",
+                        "secondary-fixed-dim": "#ffb0cd",
+                        "on-tertiary-container": "#282a2a",
+                        "tertiary-container": "#909191",
+                        "surface-container-high": "#2a292f",
+                        "primary-fixed-dim": "#d0bcff",
+                        "on-secondary": "#640039",
+                        "on-surface": "#e4e1e9",
+                        "on-tertiary": "#2f3131",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary-fixed": "#3e0022",
+                        "on-primary-fixed": "#23005c",
+                        "inverse-on-surface": "#303036",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "secondary-container": "#aa0266",
+                        "outline": "#958ea0",
+                        "on-error-container": "#ffdad6",
+                        "primary": "#d0bcff",
+                        "on-background": "#e4e1e9",
+                        "secondary": "#ffb0cd",
+                        "surface-variant": "#35343a",
+                        "surface": "#131318",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "surface-container-lowest": "#0e0e13",
+                        "secondary-fixed": "#ffd9e4",
+                        "tertiary": "#c6c6c7",
+                        "primary-fixed": "#e9ddff",
+                        "on-surface-variant": "#cbc3d7",
+                        "on-primary-container": "#340080",
+                        "on-secondary-fixed-variant": "#8c0053",
+                        "surface-container-highest": "#35343a",
+                        "surface-tint": "#d0bcff"
+                    },
+                    borderRadius: {
+                        DEFAULT: "1rem",
+                        lg: "2rem",
+                        xl: "3rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        gutter: "24px",
+                        "margin-desktop": "48px",
+                        "split-left": "55%",
+                        "margin-mobile": "20px",
+                        "container-max": "1440px",
+                        "split-right": "45%"
+                    },
+                    fontFamily: {
+                        "display-lg-mobile": ["Sora"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "label-caps": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "display-lg": ["Sora"],
+                        "headline-md": ["Sora"]
+                    },
+                    fontSize: {
+                        "display-lg-mobile": ["36px", { lineHeight: "1.1", fontWeight: "800" }],
+                        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "label-caps": ["12px", { lineHeight: "1", letterSpacing: "0.1em", fontWeight: "700" }],
+                        "body-sm": ["14px", { lineHeight: "1.5", fontWeight: "400" }],
+                        "display-lg": ["48px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "800" }],
+                        "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }]
+                    }
+                }
+            }
+        };
+    </script>
+<style>
+        body {
+            background-color: #0a0a0f;
+        }
+        .glass-panel {
+            background: rgba(31, 31, 37, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 0.5px solid rgba(255, 255, 255, 0.12);
+        }
+        .glass-row {
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glass-row:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .brand-gradient {
+            background: linear-gradient(135deg, #d0bcff 0%, #ffb0cd 100%);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #d0bcff 0%, #ffb0cd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glowing-heart {
+            color: #ffb0cd;
+            text-shadow: 0 0 10px rgba(255, 176, 205, 0.5);
+        }
+    </style>
+</head>
+<body class="text-on-background font-body-lg min-h-screen flex overflow-hidden">
+<!-- Top App Bar (Merged Desktop Nav logic) -->
+<header class="w-full h-20 top-0 sticky z-40 bg-transparent flex justify-between items-center px-gutter lg:px-margin-desktop hidden lg:flex fixed top-0 w-full backdrop-blur-[20px] bg-surface-container/30 border-b border-white/10">
+<div class="flex items-center gap-8">
+</div>
+</header>
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden lg:flex flex-col p-gutter gap-6 h-screen w-64 fixed left-0 top-0 bg-surface-container/60 backdrop-blur-[20px] border-r border-white/10 z-50">
+<div class="mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden flex-shrink-0">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="A macro shot of a sleek, futuristic metallic sphere glowing with a subtle internal violet light against a pitch-black background, representing a high-end avatar. The lighting is dramatic and nocturnal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBx_l_8BQbQqssZtw2YTCY8LKkcPgGxe_KrJQsOnJCWhI5k5j2VkjuXc1oAyrpgxykiFJe2360GyOcTuDAIMSPqiVA1Q6U43HTfSolxV09tPx7klGgUOKKJiJzcUNPy0MLbSw3p3vpb5s917Jg169z_3MM8vxj4oecPZWZRtJFQ-GUSABKGyQdguuPHXgHTJMaGAvg5SNNV8hKHOxIVT2BQiUkB0hmfJlpgyUobXEUy7tH5sOqLKX6H">
+</div>
+<div>
+<h1 class="font-display-lg text-[24px] bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">BeatMess</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-1">Premium Member</p>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-on-surface px-4 py-2 hover:bg-white/10 transition-all duration-300 rounded-full active:scale-95" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-headline-md text-[16px]">Home</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-on-surface px-4 py-2 hover:bg-white/10 transition-all duration-300 rounded-full active:scale-95" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-headline-md text-[16px]">Explore</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-on-surface px-4 py-2 hover:bg-white/10 transition-all duration-300 rounded-full active:scale-95" href="#">
+<span class="material-symbols-outlined">library_music</span>
+<span class="font-headline-md text-[16px]">Library</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-on-surface px-4 py-2 hover:bg-white/10 transition-all duration-300 rounded-full active:scale-95" href="#">
+<span class="material-symbols-outlined">playlist_play</span>
+<span class="font-headline-md text-[16px]">Playlists</span>
+</a>
+<a class="flex items-center gap-4 bg-gradient-to-r from-primary to-secondary text-on-primary rounded-full px-4 py-2 hover:bg-white/10 transition-all duration-300 active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="font-headline-md text-[16px]">Liked Songs</span>
+</a>
+</div>
+<div class="mt-auto flex flex-col gap-2">
+<button class="w-full py-3 px-4 rounded-full border border-white/20 text-on-surface hover:bg-white/10 transition-colors font-headline-md text-[14px]">Upgrade to Pro</button>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-on-surface px-4 py-2 hover:bg-white/10 transition-all duration-300 rounded-full" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-body-sm text-[14px]">Settings</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-on-surface px-4 py-2 hover:bg-white/10 transition-all duration-300 rounded-full" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span class="font-body-sm text-[14px]">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 lg:ml-64 p-margin-desktop overflow-y-auto h-screen relative">
+<!-- Abstract Background Glow -->
+<div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px] -z-10 pointer-events-none opacity-50 mix-blend-screen"></div>
+<!-- Header Section -->
+<div class="flex items-end justify-between mb-8 mt-12 lg:mt-0"><div class="flex flex-col gap-6">
+<h1 class="font-display-lg text-display-lg text-on-surface">Your Library</h1>
+<div class="flex gap-4 p-1 glass-panel rounded-full w-fit">
+<button class="px-6 py-2 rounded-full brand-gradient text-on-primary font-headline-md text-[14px] shadow-[0_0_15px_rgba(208,188,255,0.2)]">Liked Songs</button>
+<button class="px-6 py-2 rounded-full text-on-surface-variant hover:text-on-surface font-headline-md text-[14px] transition-colors">Playlists</button>
+<button class="px-6 py-2 rounded-full text-on-surface-variant hover:text-on-surface font-headline-md text-[14px] transition-colors">History</button>
+</div>
+</div>
+<div class="flex items-center h-[53px] self-start mt-auto mb-auto">
+<button class="flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span class="font-headline-md text-[14px] text-gradient">New Playlist</span>
+</button>
+</div></div>
+<!-- Content Area -->
+<div class="glass-panel rounded-[24px] min-h-[500px] p-6"><!-- List Controls -->
+<div class="flex items-center gap-6 mb-8">
+<button class="flex items-center justify-center w-14 h-14 rounded-full brand-gradient text-on-primary hover:scale-105 transition-transform shadow-[0_0_20px_rgba(208,188,255,0.3)]">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<button class="flex items-center justify-center w-10 h-10 text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[28px]">shuffle</span>
+</button>
+<div class="ml-auto text-on-surface-variant font-body-sm text-[14px]">
+                    248 Songs • 14 hrs 32 mins
+                </div>
+</div>
+<!-- List Header -->
+<div class="grid grid-cols-[60px_2fr_1fr_120px_80px_80px] gap-4 px-4 py-2 border-b border-white/10 text-on-surface-variant font-label-caps text-label-caps mb-4">
+<div class="text-center">#</div>
+<div class="">Title</div>
+<div class="">Album</div>
+<div class="text-right">Date Added</div>
+<div class="text-center"><span class="material-symbols-outlined text-[16px]">schedule</span></div>
+<div></div>
+</div>
+<!-- List Rows -->
+<div class="flex flex-col gap-2">
+<!-- Row 1 -->
+<div class="glass-row grid grid-cols-[60px_2fr_1fr_120px_80px_80px] gap-4 p-4 rounded-xl group items-center">
+<div class="text-on-surface-variant font-headline-md text-[14px] flex items-center justify-center">
+<span class="group-hover:hidden">1</span>
+<span class="material-symbols-outlined hidden group-hover:block text-primary">play_arrow</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKMx44Nnwy2MNvO8j-DKUER0NcB4pEoxc9OjYXrn8eS-9Z0UI1ZVyNF0VsknrJkOMCKWjeB6qPGmCW9hePyGOnTppL84Nfc79RaWhzry3q49Zbksl9sHVx3NRtWiUY_p1iAT5WeWa5sCRzrOp_vIyZ9LGjQMoJMPL4APMKo7BPkYpKwbSX-gYWpxTNnlsF00rtUdLx-Dm3pKvNZmwv5WzOD92H9QynOrJVmq3n8mrg1_he1yB0JjXc">
+</div>
+<div>
+<div class="font-headline-md text-[16px] text-on-surface mb-1">Neon Drift</div>
+<div class="font-body-sm text-[14px] text-on-surface-variant">Synthwave Collective</div>
+</div>
+</div>
+<div class="font-body-sm text-[14px] text-on-surface-variant">Midnight Drive</div>
+<div class="text-right font-body-sm text-[14px] text-on-surface-variant">2 days ago</div>
+<div class="text-center font-body-sm text-[14px] text-on-surface-variant">4:12</div>
+<div class="flex items-center justify-center gap-4">
+<span class="material-symbols-outlined glowing-heart text-[20px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">more_horiz</span>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="glass-row grid grid-cols-[60px_2fr_1fr_120px_80px_80px] gap-4 p-4 rounded-xl group items-center">
+<div class="text-on-surface-variant font-headline-md text-[14px] flex items-center justify-center">
+<span class="group-hover:hidden">2</span>
+<span class="material-symbols-outlined hidden group-hover:block text-primary">play_arrow</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPp16G4S9aAAsmVPskLZSMB5R3zVov4hmGBNDVPVXkX1T19eS6t45aOJuBATgJyjXzD-CQRQO3aZUIS4hzhDVh7PQDVJEUUQGdGrK4TjXGFvmxkJdj8y6dhIqGkqQH7pxLGvyMFeqQAmw1elNzUKA8A0GWke2fe6MJNkDU9TAii-S8WsvQMA6EvyFPaKc5wvYhJc7fWQjEvYbl-wbWMwCL5MVSQFH-xeLLx82LSwK1SKYM4U7L9FME">
+</div>
+<div>
+<div class="font-headline-md text-[16px] text-on-surface mb-1">Lunar Resonance</div>
+<div class="font-body-sm text-[14px] text-on-surface-variant">Echo Delta</div>
+</div>
+</div>
+<div class="font-body-sm text-[14px] text-on-surface-variant">Void Frequency</div>
+<div class="text-right font-body-sm text-[14px] text-on-surface-variant">5 days ago</div>
+<div class="text-center font-body-sm text-[14px] text-on-surface-variant">3:45</div>
+<div class="flex items-center justify-center gap-4">
+<span class="material-symbols-outlined glowing-heart text-[20px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">more_horiz</span>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="glass-row grid grid-cols-[60px_2fr_1fr_120px_80px_80px] gap-4 p-4 rounded-xl group items-center">
+<div class="text-on-surface-variant font-headline-md text-[14px] flex items-center justify-center">
+<span class="group-hover:hidden">3</span>
+<span class="material-symbols-outlined hidden group-hover:block text-primary">play_arrow</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0b-1VkbNbya1g9OSbRqfB7L8f1ev6U9aCvOa_4UrIDSzL7KtSz56pXT4OMIgW_nWcquyI62CldbHfuFMaBtsbF9U9-mWG6SMbVzK9wdEvDpjB4KcuC-vyMU3xPyLht2tHU812kEw9istYW80jgvMppIHi1HgM1ISAYYsnNWSlSb2-_eHc2Re8nrw5TN0cVMVMyR0b-mwG-Adubc79lYC6bhdhQ-AX9za2D-CMhyffkZJw_E5kQFyi">
+</div>
+<div>
+<div class="font-headline-md text-[16px] text-on-surface mb-1">Static Pulse</div>
+<div class="font-body-sm text-[14px] text-on-surface-variant">The Overrides</div>
+</div>
+</div>
+<div class="font-body-sm text-[14px] text-on-surface-variant">Singularity</div>
+<div class="text-right font-body-sm text-[14px] text-on-surface-variant">1 week ago</div>
+<div class="text-center font-body-sm text-[14px] text-on-surface-variant">5:20</div>
+<div class="flex items-center justify-center gap-4">
+<span class="material-symbols-outlined glowing-heart text-[20px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">more_horiz</span>
+</div>
+</div>
+</div></div>
+</main>
+
+
+</body></html>

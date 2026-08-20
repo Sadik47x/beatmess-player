@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BeatMess - Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700&amp;family=Sora:wght@600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed": "#23005c",
+                      "on-secondary-fixed-variant": "#8c0053",
+                      "inverse-primary": "#6d3bd7",
+                      "secondary": "#ffb0cd",
+                      "error": "#ffb4ab",
+                      "primary-fixed-dim": "#d0bcff",
+                      "tertiary": "#c6c6c7",
+                      "on-error": "#690005",
+                      "on-surface": "#e4e1e9",
+                      "surface-bright": "#39383e",
+                      "surface": "#131318",
+                      "on-secondary": "#640039",
+                      "on-primary": "#3c0091",
+                      "surface-container-low": "#1b1b20",
+                      "surface-container-lowest": "#0e0e13",
+                      "on-tertiary": "#2f3131",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "on-primary-fixed-variant": "#5516be",
+                      "error-container": "#93000a",
+                      "inverse-on-surface": "#303036",
+                      "on-error-container": "#ffdad6",
+                      "on-tertiary-container": "#282a2a",
+                      "outline": "#958ea0",
+                      "surface-tint": "#d0bcff",
+                      "tertiary-fixed": "#e2e2e2",
+                      "secondary-fixed": "#ffd9e4",
+                      "on-surface-variant": "#cbc3d7",
+                      "on-primary-container": "#340080",
+                      "primary": "#d0bcff",
+                      "surface-dim": "#131318",
+                      "secondary-container": "#aa0266",
+                      "primary-fixed": "#e9ddff",
+                      "surface-container-high": "#2a292f",
+                      "surface-variant": "#35343a",
+                      "surface-container": "#1f1f25",
+                      "tertiary-container": "#909191",
+                      "background": "#131318",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "primary-container": "#a078ff",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "on-secondary-fixed": "#3e0022",
+                      "on-background": "#e4e1e9",
+                      "inverse-surface": "#e4e1e9",
+                      "on-secondary-container": "#ffbad3",
+                      "outline-variant": "#494454",
+                      "surface-container-highest": "#35343a",
+                      "secondary-fixed-dim": "#ffb0cd"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "48px",
+                      "margin-mobile": "20px",
+                      "split-right": "45%",
+                      "split-left": "55%",
+                      "gutter": "24px",
+                      "container-max": "1440px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "display-lg": [
+                              "Sora"
+                      ],
+                      "headline-md": [
+                              "Sora"
+                      ],
+                      "display-lg-mobile": [
+                              "Sora"
+                      ],
+                      "label-caps": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "36px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 0.5px solid rgba(255, 255, 255, 0.12);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #d0bcff, #ffb0cd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Custom Toggle Switch Styles */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #d0bcff;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background: linear-gradient(to right, #d0bcff, #ffb0cd);
+        }
+        
+        /* Hide scrollbar for clean look on mobile */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        * {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-sm antialiased w-full min-h-screen overflow-x-hidden pb-24 relative selection:bg-primary/30 selection:text-primary">
+<!-- Top Navigation Anchor (Mobile Only mapped) -->
+<header class="flex justify-between items-center w-full px-margin-mobile py-4 docked full-width top-0 sticky bg-white/5 backdrop-blur-[20px] z-40 border-b-[0.5px] border-white/12">
+<h1 class="font-display-lg-mobile text-display-lg-mobile bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Settings</h1>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-all focus-within:ring-1 focus-within:ring-primary rounded-full p-2">
+<span class="material-symbols-outlined" data-icon="notifications" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-white/12 cursor-pointer focus-within:ring-1 focus-within:ring-primary">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A futuristic, high-contrast avatar image of a user for a premium music streaming app. The portrait features moody, dark studio lighting with sharp neon violet and pink rim lights contouring the subject's face. The aesthetic is modern, cyberpunk-inspired, and highly polished, reflecting a sophisticated audiophile identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbxRH0ogHVsiejfx2AuTZF4BXnfszObHm08ulnBKrqsevpx01hJzZG0-KlM9rduhIztucc3Ow87Niw34JuzimggreNyzlbjLyk1-gStispe_XdCr741GUGOm1bzB0KcgxYDFJ5vWV0lyS3YmPwt-HCWwsVR4emn9H0RzM5qJxDalautPPLC_WdKIlHbBWe5fhd-9JLuQe6LAkhN07T0IvWM3MGZfqtFXdtDusl9aFhHulGwVdR_bPA"/>
+</div>
+</div>
+</header>
+<main class="w-full max-w-[390px] mx-auto px-margin-mobile pt-6 space-y-6">
+<!-- Account Section -->
+<section class="glass-panel rounded-lg p-6 space-y-6">
+<h2 class="font-headline-md text-headline-md text-primary">Account</h2>
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-full overflow-hidden border border-white/12">
+<img alt="User profile large" class="w-full h-full object-cover" data-alt="A futuristic, high-contrast avatar image of a user for a premium music streaming app. The portrait features moody, dark studio lighting with sharp neon violet and pink rim lights contouring the subject's face. The aesthetic is modern, cyberpunk-inspired, and highly polished, reflecting a sophisticated audiophile identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdzy2YRAdpaTNDWomimfU5iv7YktH-VqfL1uX1aFB3XAWg1IBrNMQy1PUjVYpy46q0IeEjnjTJbvuZh5g1AWaI4DVf3fFviUVIwI0DeyCCV1th8uH59i5WxhOwItqSZ0bgztpCO5LgfpO0cptjvAnYTjbu9A9ZrIcdQDW4SmOh5RNabAT9qh6ZAQ1f97EbTQoj_Q9VYu8GL7nkeZ8dr2rDL6MLPDHH1yiYUGoXpDhXt902WCe-zBTK"/>
+</div>
+<div>
+<h3 class="font-body-lg text-body-lg text-on-surface font-bold">Alex Nova</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Premium Member</p>
+</div>
+</div>
+<div class="space-y-3">
+<button class="w-full py-3 rounded-full bg-white/6 border border-white/20 text-on-surface font-body-sm font-bold hover:bg-white/10 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+                     Edit Profile
+                 </button>
+<button class="w-full py-3 rounded-full bg-error-container/20 border border-error/30 text-error font-body-sm font-bold hover:bg-error-container/40 transition-colors shadow-[0_0_10px_rgba(255,180,171,0.1)] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+                     Log Out
+                 </button>
+</div>
+</section>
+<!-- Playback Section -->
+<section class="glass-panel rounded-lg p-6 space-y-6">
+<h2 class="font-headline-md text-headline-md text-primary">Playback</h2>
+<div class="space-y-4">
+<div class="flex flex-col gap-2">
+<label class="font-body-sm text-body-sm text-on-surface font-bold">Stream Quality</label>
+<div class="flex bg-surface-container-high rounded-full p-1 border border-white/12 relative overflow-hidden">
+<!-- Segmented Pill Logic -->
+<div class="absolute left-1 top-1 bottom-1 w-[calc(33.33%-4px)] bg-gradient-to-r from-primary to-secondary rounded-full z-0 transition-transform duration-300" id="quality-selector-pill"></div>
+<button class="flex-1 py-2 relative z-10 font-label-caps text-label-caps text-on-primary-container" onclick="document.getElementById('quality-selector-pill').style.transform = 'translateX(0)'">LOW</button>
+<button class="flex-1 py-2 relative z-10 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface transition-colors" onclick="document.getElementById('quality-selector-pill').style.transform = 'translateX(100%)'">HIGH</button>
+<button class="flex-1 py-2 relative z-10 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface transition-colors" onclick="document.getElementById('quality-selector-pill').style.transform = 'translateX(200%)'">MAX</button>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div>
+<p class="font-body-sm text-body-sm text-on-surface font-bold">Fallback Source</p>
+<p class="font-body-sm text-[12px] text-on-surface-variant leading-tight mt-1">Use cellular if Wi-Fi drops</p>
+</div>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 top-0 left-0 transition-all duration-300 border-surface-container" id="toggle1" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container cursor-pointer transition-all duration-300 border border-white/12" for="toggle1"></label>
+</div>
+</div>
+</div>
+</section>
+<!-- Storage Section -->
+<section class="glass-panel rounded-lg p-6 space-y-6">
+<h2 class="font-headline-md text-headline-md text-primary">Storage</h2>
+<div class="space-y-3">
+<button class="w-full py-3 rounded-full bg-white/6 border border-white/20 text-on-surface font-body-sm font-bold hover:bg-white/10 transition-colors flex items-center justify-between px-6 group">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+                         Force Refresh
+                     </span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</button>
+<button class="w-full py-3 rounded-full bg-white/6 border border-white/20 text-on-surface font-body-sm font-bold hover:bg-white/10 transition-colors flex items-center justify-between px-6 group" onclick="showToast()">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+                         Clear Cache
+                     </span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">124 MB</span>
+</button>
+</div>
+</section>
+<!-- About Section -->
+<section class="glass-panel rounded-lg p-6 space-y-4">
+<h2 class="font-headline-md text-headline-md text-primary">About</h2>
+<div class="flex flex-col gap-3">
+<a class="flex items-center justify-between font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span>Privacy Policy</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+<a class="flex items-center justify-between font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span>Terms of Service</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+</div>
+<div class="pt-4 border-t border-white/12 flex justify-between items-center">
+<span class="font-body-sm text-[12px] text-on-surface-variant">Version 4.2.1</span>
+<span class="font-display-lg-mobile text-[16px] text-gradient font-bold tracking-tighter">BeatMess</span>
+</div>
+</section>
+</main>
+<!-- Navigation Shell Suppressed for Settings Screen per instructions (Linear/Task-focused / Intent Fallback: Account mapping usually sits outside main loops or if it maps, it doesn't map to Home/Explore/Library/Premium directly, but the prompt explicitly mentions bottom tab nav in the initial text. Wait, conflict resolution: Prompt asks for "Bottom tab nav". Instructions say "Contextual Suppression: You MUST ONLY render the FAB if... You MUST suppress the FAB on Settings... The Destination Rule: You are only permitted to render the BottomNavBar... if the current screen represents a top-level destination... Automatic Suppression: You MUST exclude the navigation shell if the page intent is: ... Settings ... " Wait, instructions say "Automatic Suppression: You MUST exclude the navigation shell if the page intent is: ... Task-Focused: Any sub-page featuring a 'Close' or 'Back' action... If designing a user settings page, 'Profile' is active... suppress the FAB on Settings... "
+    Actually, looking at the strict rules: "Automatic Suppression: You MUST exclude the navigation shell if the page intent is... Task-Focused... But wait, earlier it says: "ACTIVE STATE LOGIC (CRITICAL): ... If designing a user settings page, "Profile" is active."
+    Since the JSON doesn't have a "Profile" tab (Home, Explore, Library, Premium), and it's a settings page. I will not render Bottom Nav based on "Automatic Suppression... suppress on Settings... Wait, prompt says: "Bottom tab nav." 
+    If I must render it based on prompt, I will render it and leave all inactive, or select Premium as it's the closest to Account/Settings. But "Intent Fallback: ONLY use semantic intent if there is no direct match... Anti-Hallucination: Do NOT highlight generic tabs...". I'll render the bottom nav as requested by user, but suppress active states if none match perfectly.
+    Actually, let's render the JSON BottomNavBar as requested.
+    -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-lg bg-white/5 backdrop-blur-[20px] border-t-[0.5px] border-white/12 md:hidden">
+<ul class="flex justify-around items-center px-4 pb-6 pt-2">
+<li class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:opacity-80 transition-opacity w-16">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">home</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</li>
+<li class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:opacity-80 transition-opacity w-16">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">search</span>
+<span class="font-label-caps text-label-caps">Explore</span>
+</li>
+<li class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:opacity-80 transition-opacity w-16">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">library_music</span>
+<span class="font-label-caps text-label-caps">Library</span>
+</li>
+<li class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:opacity-80 transition-opacity w-16">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">workspace_premium</span>
+<span class="font-label-caps text-label-caps">Premium</span>
+</li>
+</ul>
+</nav>
+<!-- Toast Pill Overlay -->
+<div class="fixed bottom-24 left-1/2 -translate-x-1/2 opacity-0 pointer-events-none transition-all duration-300 transform translate-y-4 z-50" id="toast">
+<div class="glass-panel px-6 py-3 rounded-full flex items-center gap-2 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+<span class="text-secondary font-bold material-symbols-outlined text-[18px]">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface font-bold">Cache cleared</span>
+</div>
+</div>
+<script>
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('opacity-0', 'translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-4');
+                toast.classList.remove('opacity-100', 'translate-y-0');
+            }, 2500);
+        }
+    </script>
+</body></html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>BeatMess - Artist Profile</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700&amp;family=Sora:wght@600;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#131318",
+                        "error": "#ffb4ab",
+                        "background": "#131318",
+                        "error-container": "#93000a",
+                        "on-tertiary-container": "#282a2a",
+                        "surface-dim": "#131318",
+                        "surface-container-lowest": "#0e0e13",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "secondary-fixed-dim": "#ffb0cd",
+                        "secondary-container": "#aa0266",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "inverse-surface": "#e4e1e9",
+                        "surface-container-high": "#2a292f",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#e2e2e2",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "secondary": "#ffb0cd",
+                        "primary-fixed-dim": "#d0bcff",
+                        "on-surface-variant": "#cbc3d7",
+                        "surface-container-low": "#1b1b20",
+                        "on-tertiary": "#2f3131",
+                        "surface-variant": "#35343a",
+                        "outline": "#958ea0",
+                        "surface-tint": "#d0bcff",
+                        "on-secondary-container": "#ffbad3",
+                        "inverse-primary": "#6d3bd7",
+                        "on-primary": "#3c0091",
+                        "surface-container-highest": "#35343a",
+                        "on-surface": "#e4e1e9",
+                        "on-secondary": "#640039",
+                        "on-secondary-fixed-variant": "#8c0053",
+                        "tertiary": "#c6c6c7",
+                        "primary-fixed": "#e9ddff",
+                        "surface-container": "#1f1f25",
+                        "surface-bright": "#39383e",
+                        "tertiary-container": "#909191",
+                        "on-error": "#690005",
+                        "inverse-on-surface": "#303036",
+                        "on-secondary-fixed": "#3e0022",
+                        "on-background": "#e4e1e9",
+                        "primary-container": "#a078ff",
+                        "primary": "#d0bcff",
+                        "on-primary-fixed-variant": "#5516be",
+                        "on-primary-fixed": "#23005c",
+                        "secondary-fixed": "#ffd9e4",
+                        "outline-variant": "#494454",
+                        "on-primary-container": "#340080"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "split-right": "45%",
+                        "margin-mobile": "20px",
+                        "split-left": "55%",
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Sora"],
+                        "display-lg": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "label-caps": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["36px", { "lineHeight": "1.1", "fontWeight": "800" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 0.5px solid rgba(255, 255, 255, 0.12);
+        }
+        
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        body {
+            background-color: #0a0a0f; /* Overriding slightly for darker immersive feel as requested */
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+<body class="text-on-surface antialiased overflow-x-hidden min-h-screen pb-[160px]">
+<!-- Back Button / Top Bar -->
+<div class="fixed top-0 left-0 w-full z-40 px-margin-mobile pt-12 pb-4 flex items-center justify-between pointer-events-none">
+<button class="w-10 h-10 rounded-full glass-panel flex items-center justify-center pointer-events-auto active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-on-surface">arrow_back</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel flex items-center justify-center pointer-events-auto active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-on-surface">more_vert</span>
+</button>
+</div>
+<!-- Hero Banner -->
+<header class="relative w-full h-[220px]">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A moody, high-fashion photography portrait of an electronic music artist named Neon Echo. The artist is bathed in deep violet and hot pink neon lighting, set against a completely dark background. The image has a highly stylized, futuristic, and premium aesthetic, perfect for a dark-mode music streaming app hero banner. 8k resolution, cinematic lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD550qhbDAsSjFk2XeqzyLPibpr6q3KW1vc-X4T-X0jMvG4L1xTEI6RH8FcZFYwjNtrvgM77dVPjbjch4W1glyn7rRHUZggntHvWvoEa4ADAW2pQbNIuEs1uQYo4ek7xwv_Il0l-c0nSmEsikhIGxVcUjZyRPAOM2X_ZVQuJzKqg7kfLar3yZ-NTSNN9xgE_gNl8e3ZuJjb5RkPQApQET_MbG3Lxzo-S3RZA3c4u2sgPjtqxGupq-oz')"></div>
+<!-- Gradient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0f]/50 to-[#0a0a0f]"></div>
+<div class="absolute bottom-4 left-margin-mobile right-margin-mobile flex flex-col justify-end">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Verified Artist</span>
+</div>
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-white drop-shadow-lg">Neon Echo</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">2.4M Monthly Listeners</p>
+</div>
+</header>
+<!-- Actions Row -->
+<div class="px-margin-mobile mt-4 flex items-center justify-between relative z-10">
+<div class="flex gap-3">
+<button class="glass-panel px-6 py-2.5 rounded-full font-label-caps text-label-caps text-white flex items-center gap-2 active:bg-white/10 transition-colors">
+                Follow
+            </button>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full glass-panel flex items-center justify-center active:scale-90 transition-transform text-on-surface-variant hover:text-white">
+<span class="material-symbols-outlined">shuffle</span>
+</button>
+<button class="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center shadow-[0_0_20px_rgba(208,188,255,0.3)] active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+</div>
+<!-- Popular Section -->
+<section class="mt-8 px-margin-mobile">
+<h2 class="font-headline-md text-headline-md mb-4 text-white">Popular</h2>
+<div class="flex flex-col gap-3">
+<!-- Track 1 -->
+<div class="flex items-center gap-4 group active:bg-white/5 p-2 -mx-2 rounded-xl transition-colors">
+<span class="font-label-caps text-label-caps w-4 text-center text-primary">1</span>
+<img class="w-12 h-12 rounded-md object-cover" data-alt="A sleek, minimalist square album cover art featuring a glowing neon violet ring floating in a deep black void. Premium futuristic digital art style for an electronic track thumbnail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCC3tLbsL8NCOeHXDVW6R7MGeIdN-35n3QFvV-IWYZw8eXSfeWC21IFfkGD1HZrrvcLDsdVRQqUquOG5DkLFN0o1BgevKNAllA9r8qaEeVvAMISBVPIANTZ72N_CZsOO3_T0ZbpzyTLuRbetKWo5U2wjy3ULMzB71YTC-VRk6IBIz3IlbC_Ssswth4WeRC-n8ycB-61hsHeZ1_xVtFabPFvu6HXc_SJury0ntiUWiP3KTRT5bqJuUn6"/>
+<div class="flex-1 min-w-0">
+<p class="font-body-lg text-body-lg text-white truncate leading-tight">Neon Pulse</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">34,512,098</p>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mr-2">3:42</span>
+<button class="text-on-surface-variant">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Track 2 -->
+<div class="flex items-center gap-4 group active:bg-white/5 p-2 -mx-2 rounded-xl transition-colors">
+<span class="font-label-caps text-label-caps w-4 text-center text-on-surface-variant">2</span>
+<img class="w-12 h-12 rounded-md object-cover" data-alt="Dark, moody album cover thumbnail featuring shattered glass reflecting bright magenta and cyan light against a pitch-black background. High contrast, modern electronic music visualizer aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA19GtCjTe9KPIFLwoVBQJa2Wnsl0kznWOUf-2RUpdPWeTmIHTiLFe2L3u8lvki2wHfxV0mqF-uViFlzi7JhISzJVIpkxr43Rp21P4NKQ6cOWMkgG5ESNMlNg16Bq7jsDhPehXLjbLrQ2_BoLM4wwgxBJ4gL9D5AfSA-VII2aTgROUI3CbfMTkQhAK1DeViU96rf0-Q-MgZ3P_N2x4I7rIGDpqCxEjpSwMRAb5eKusH78xGjRcC7_dc"/>
+<div class="flex-1 min-w-0">
+<p class="font-body-lg text-body-lg text-white truncate leading-tight">Midnight Synth</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">28,104,550</p>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mr-2">4:15</span>
+<button class="text-on-surface-variant">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Track 3 -->
+<div class="flex items-center gap-4 group active:bg-white/5 p-2 -mx-2 rounded-xl transition-colors">
+<span class="font-label-caps text-label-caps w-4 text-center text-on-surface-variant">3</span>
+<img class="w-12 h-12 rounded-md object-cover" data-alt="Square thumbnail album art showing a long exposure light trail of a car on a dark highway, entirely in shades of deep purple and hot pink. High-end, moody nocturnal atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD4JeWZprQjTo3-SgNZgx7-PavC_x0CBL0h9rxSR0t6XMUTxMW0inTtjKCZShcSlYqA4tjevLAh-6cwk9XrPIIKNN5kCFCEaEYo7iA0_LH0Y4Cq67CRHAwUgoX-ni-R8dJvP7NI0dzCGAwGpEnLvz4F7DbDY2wzFwiMojD0nC35mcIm60p21A4BFac5UiukNNpVT6NVH-r62wSt4Jtjmb-lbiRivmwA2GHSJRInOLCOipmDSeGBCVN"/>
+<div class="flex-1 min-w-0">
+<p class="font-body-lg text-body-lg text-white truncate leading-tight">Velocity</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">19,840,211</p>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mr-2">2:58</span>
+<button class="text-on-surface-variant">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Track 4 -->
+<div class="flex items-center gap-4 group active:bg-white/5 p-2 -mx-2 rounded-xl transition-colors">
+<span class="font-label-caps text-label-caps w-4 text-center text-on-surface-variant">4</span>
+<img class="w-12 h-12 rounded-md object-cover" data-alt="A minimalist album thumbnail consisting of a deep black background with a single, sharp diagonal line of glowing vibrant secondary-container pink light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwMvuyar4F9ot3onzNPh7EITcX_p4OPjUwsGaMOKNYauVpEgADgZfKvzpNSM0J0BWuOsYNMcXjT_fXiso4b7Fls54C6sYQbBaWWLVo0-_Mu4gRBaJ6wi9U2Zo2ekI52VkL44svoVDZXAdcCVFMD2tVcmIropHHj9FIf8jIjuvIynzgACk0zceBc-QOBm7VoZ553S6yDPhWKO10MpRyhtXHHfRLFFfsTS_C5CxATFDFyxrVOr8wMRkn"/>
+<div class="flex-1 min-w-0">
+<p class="font-body-lg text-body-lg text-white truncate leading-tight">Cyber Rain</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">15,200,993</p>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mr-2">5:01</span>
+<button class="text-on-surface-variant">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<!-- Track 5 -->
+<div class="flex items-center gap-4 group active:bg-white/5 p-2 -mx-2 rounded-xl transition-colors">
+<span class="font-label-caps text-label-caps w-4 text-center text-on-surface-variant">5</span>
+<img class="w-12 h-12 rounded-md object-cover" data-alt="Album art thumbnail depicting a hazy, neon-lit futuristic cityscape at night. Deep shadows, purple and cyan color palette, cinematic and highly detailed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB57RvKqJKgO4LqSQkgBbLNwFji5MRRXFS5cny11Lww8uzoqMJ4ZrMlLiYeSeuw89FyjsInYTse3vGavUBjyjNrr9XqDzEuqkf2NXAwebb39OOHXQ2Q-Y7hUf_G4iYqd4jCgJRZu2YsLZe4d7kXtCSt3Ivg57cNm9HDNu9SlBgRy7e5Rqo5MkLy2VRt_7xs11a2Mt_TvuXfGh3flZEfFqLh236imAccUkPXUFYccC_VEyIMDO6HueXx"/>
+<div class="flex-1 min-w-0">
+<p class="font-body-lg text-body-lg text-white truncate leading-tight">Echoes</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">12,055,400</p>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mr-2">3:22</span>
+<button class="text-on-surface-variant">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Albums Horizontal Rail -->
+<section class="mt-10">
+<div class="px-margin-mobile flex items-center justify-between mb-4">
+<h2 class="font-headline-md text-headline-md text-white">Releases</h2>
+</div>
+<div class="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar pl-margin-mobile pr-margin-mobile pb-2">
+<!-- Album 1 -->
+<div class="snap-start shrink-0 w-[140px] flex flex-col gap-2">
+<img class="w-[140px] h-[140px] rounded-xl object-cover shadow-lg border border-white/5" data-alt="A premium 3D render album cover featuring liquid chrome flowing over geometric shapes against a dark violet background. Sleek, tactile, and highly detailed digital art for an electronic EP release." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtfxUSjnsSwSE9nj0qa9Qi2zUolETtvgEpdlgpLOxvfH4jUXhB70NGOFtM92g0zXW4Iv1Wo3yEP6DHGNQL46z0Q6sByjug459dZwRpiuycFPy1nCbgPrGpBUJKZVdaAaki45afewQYC-xc7dAtX1QR1QBl6SBu4gjjM9aioHEBVUWCHiyEkB2I9p08k3fRuXqr8-RHKqf1STXzCTbOANK9aQrOkW7_JGJkBcMp5V3WgebD6puH6Eqo"/>
+<div>
+<p class="font-body-sm text-body-sm text-white truncate font-bold">Neon Pulse EP</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant mt-1">2023 • EP</p>
+</div>
+</div>
+<!-- Album 2 -->
+<div class="snap-start shrink-0 w-[140px] flex flex-col gap-2">
+<img class="w-[140px] h-[140px] rounded-xl object-cover shadow-lg border border-white/5" data-alt="Album cover showing an abstract representation of soundwaves using glowing pink and violet neon lines in a completely dark room. High contrast, clean and modern visualizer aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmvU_gCUHDaIV1RaYqQefjhcM1ardGycZyLOK0fTz_3TmunXUs-py3D6OzOaHe0HxETEUuVbzNRnYq81ygq6sA8VdxbNMcY5UHyAtAiGYpeUN4Hw8U6IPQEAFKmwfXJHcHl6zZCxuGVX6JNJ0RFuGZ0U4c9ZNbLNewBP_cgvprLcKceka8-ARqDTWMX8_CKNOKE3wq9DJ6CxqhrzOKow98o0QPwUaUKbfjSO03snGoXJmfLB7Wiah8"/>
+<div>
+<p class="font-body-sm text-body-sm text-white truncate font-bold">Frequencies</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant mt-1">2022 • Album</p>
+</div>
+</div>
+<!-- Album 3 (Peeking) -->
+<div class="snap-start shrink-0 w-[140px] flex flex-col gap-2">
+<img class="w-[140px] h-[140px] rounded-xl object-cover shadow-lg border border-white/5" data-alt="A dark, moody album cover featuring a solitary silhouette standing in front of a massive glowing violet sphere in an empty void. Cinematic lighting, minimalist and epic composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANZM5PeKsCjocQsjhmdZKrFZ69M9G778x9tBb42W32Lwc5tB_U69EH4BlCKq3TlYM_3hlibV3nFXcxJ6aFJxIPV7MFAO0f3zQX4TerrlKN96h0eYyfp2s5PAUjG_Ms6DGyT2g1xoQRCmSQ1P3Ijyen4mPsGeoQsTlUHc6FQkvJEky0vIjl68Dmm4zOGTLQGKfyb3v1hsE52QvHL12ktdapujuXLg6BhyUMZmqJ-eFX6N9R4cx-HRJa"/>
+<div>
+<p class="font-body-sm text-body-sm text-white truncate font-bold">Void Walker</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant mt-1">2021 • Album</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Fans Also Like -->
+<section class="mt-10">
+<h2 class="font-headline-md text-headline-md mb-4 px-margin-mobile text-white">Fans Also Like</h2>
+<div class="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar pl-margin-mobile pr-margin-mobile pb-2">
+<div class="snap-start shrink-0 w-[100px] flex flex-col items-center gap-2">
+<img class="w-[100px] h-[100px] rounded-full object-cover shadow-lg border border-white/10" data-alt="A portrait photography shot of a female DJ bathed in moody blue and pink lighting. She is wearing sleek, modern streetwear. Dark background, premium aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQJ6iEGN3KwrAyMB2QvdQO_BdPOY5cTFn4f-55ZzE8tn-r7BBHdi_f8f3E6Ymk08JYQExBU-GdVJdEDrqTjbjvJxtn1XQAoumNIqApvDq7Mdc4ZV949n77ygjLRlYA0zxM6BX3kAxOLsFOPOOYYZM6f8VffBnXqU6sJB3RkO4MSm6vOTAIzaUDHCZyi8WVnh854y_s6xKvtuc-OsSj27VIot0IA_XBcrYDfSm5GDv8lsfMcZntfzT0"/>
+<p class="font-body-sm text-body-sm text-white text-center truncate w-full">Luna Sync</p>
+</div>
+<div class="snap-start shrink-0 w-[100px] flex flex-col items-center gap-2">
+<img class="w-[100px] h-[100px] rounded-full object-cover shadow-lg border border-white/10" data-alt="Close up shot of an electronic music producer's face, obscured by shadows but illuminated by a sharp stripe of neon violet light across the eyes. Edgy, underground club vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsUuCes6dFpARPiMwhTUzh2kN4ZHcz54cawSR4bsrmMUD3Hz4oLUFTGnFfOsxA3JoV9fQsbagIP8OT6D40Kp3S8csYkbZvGpeYG93WJZvP9VZKW8gEnKm_Q8ESxzm5kS3ah3u__UqydKNToGIxRDsMWhYNyZq4PYX7bVPC_O05le0rf51O1IHvoalHdezQGwIVNZAAq4aPxZMQ2E8VCGxjPPL8qs1UN0SBeGJ7fgKj9GeA05YoRvXg"/>
+<p class="font-body-sm text-body-sm text-white text-center truncate w-full">VZN</p>
+</div>
+<div class="snap-start shrink-0 w-[100px] flex flex-col items-center gap-2">
+<img class="w-[100px] h-[100px] rounded-full object-cover shadow-lg border border-white/10" data-alt="A highly stylized portrait of a music artist wearing a futuristic, reflective visor. The visor reflects glowing neon pink circuitry. Set against a pure black background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClVI3F46aDj8J36rDcnK9PAT5blrs_g_4anpZVJeHK7NCDXSkyoTCdGIxuTHQewnU1FRt80RNtKt2Kwgt4HlC-XukQlt8W_qrXFyhzONkj1eVNPSlJaGH6ewdoQBG2lhsbCtMuQZpcsknTaOsEYCMXWjqUl9kqv0PeOYnnKLhrubmbkWo1k_oM9-uLQkG19w3QlDPkWGFO6UF6LkpB2hqPbdpMokaJlY-gsoA6xFT3UyhMl4kcj324"/>
+<p class="font-body-sm text-body-sm text-white text-center truncate w-full">DataByte</p>
+</div>
+<div class="snap-start shrink-0 w-[100px] flex flex-col items-center gap-2">
+<img class="w-[100px] h-[100px] rounded-full object-cover shadow-lg border border-white/10" data-alt="Atmospheric shot of a DJ performing at a club, silhouetted against a massive LED screen displaying abstract violet and magenta geometric patterns." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTyVrG-JCPZkwhdKGIY8_1GycbwtAJ0ElVumvqe_LWXkjI3ut3MzSh7XhU1GDY_yBcLebf3hUK-vUxzMe8-mpDcPYj3P8JKV-98rGJOqfoPqBOOoheXzrbZIOlExM_5VDIGbs_qKKjIhgZ8R3DfvlLcEVhuu6khSjqP2I3Be4C_3301BGofFCSD1eUaoyrscjtfb6QMt30kwf8xlCNXZgPLVwzjeJY7_NGGszPSzsdmZaB-Gxot87g"/>
+<p class="font-body-sm text-body-sm text-white text-center truncate w-full">KROME</p>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="mt-10 px-margin-mobile mb-10">
+<h2 class="font-headline-md text-headline-md mb-4 text-white">About</h2>
+<div class="glass-panel p-6 rounded-[24px] relative overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center opacity-20 transition-opacity duration-500 group-hover:opacity-30" data-alt="A sweeping, wide-angle shot of a massive music festival stage at night, illuminated purely by intense violet and pink lasers cutting through thick fog. Epic scale, immersive dark aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBu7u0J4YAvUDEpw7h5U827n-ILovLA2i3-56Umtflh5S9IezltuRemdbvEaxLWIiGKf6svi1CA7u3GQp3Li2kLeIW3ZeAEcreSTNKy1LnMUIxg7eeqHt7V58gUTA7q07Ss-lZGY38G-YE8Q7jJE7Egmqx2qBoV2Ydns98v61UIXWni4i0KdkOXjsaxH_dMk1mLzi0YXXj--Q4Oymh7H_h23pxrxur8xiZ0wA4pwlu9bClGcxRd24nY')"></div>
+<div class="relative z-10">
+<p class="font-body-lg text-body-lg text-on-surface-variant line-clamp-4">
+                    Pioneering a new wave of immersive synthetic audio, Neon Echo blends high-octane bass lines with ethereal, cinematic soundscapes. Born in the underground clubs of Tokyo, their sound quickly evolved into a global phenomenon, defining the modern cyberpunk aesthetic.
+                </p>
+<button class="mt-4 font-label-caps text-label-caps text-primary uppercase tracking-widest flex items-center gap-1">
+                    Read More
+                </button>
+</div>
+</div>
+</section>
+<!-- Mini Player (Floating above Bottom Nav) -->
+<div class="fixed bottom-[80px] left-margin-mobile right-margin-mobile glass-panel p-2 pr-4 rounded-[20px] flex items-center gap-3 z-50 shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+<img class="w-12 h-12 rounded-[12px] object-cover" data-alt="A tiny album thumbnail showing abstract glowing purple geometry on a black background, representing the currently playing track." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLKuoJgBveA1nWd0WvqhQWXAv6NSWcQmJKKSNwRiwjzoydbUxUGPc0Q2ylXz21C6crJS2-QsEACINMz_7zSbXCqdYen2QneFN55TR8YfUprfppfJlcHnBC0IKCHhLYoJKVQjbRlgKoiysV4WLUeeZXFH66jt7JCxjYJdzPBRPizZfdsGuEmgIj9Q52Uizwk2WTyRVURvP1noVP3iP5Jde9E91yb2PKAvdpzaBX5NXmO7M1o8Cv396-"/>
+<div class="flex-1 min-w-0">
+<p class="font-body-sm text-body-sm text-white truncate font-bold">Neon Pulse</p>
+<p class="font-label-caps text-[10px] text-primary truncate">Neon Echo</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="text-on-surface-variant hover:text-white p-1">
+<span class="material-symbols-outlined text-[20px]">favorite_border</span>
+</button>
+<button class="text-white p-1">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<!-- Progress Bar Element -->
+<div class="absolute bottom-0 left-4 right-4 h-[2px] bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-secondary w-1/3"></div>
+</div>
+</div>
+<!-- BottomNavBar (Generated from JSON) -->
+<nav class="lg:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-margin-mobile py-3 pb-safe bg-surface-container/60 backdrop-blur-xl font-label-caps text-label-caps fixed bottom-0 w-full rounded-t-lg shadow-[0_-10px_20px_rgba(0,0,0,0.5)] border-t-0 border-white/10">
+<!-- Home (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 active:bg-white/10 tap-highlight-none scale-95 active:scale-90 rounded-xl transition-all w-16">
+<span class="material-symbols-outlined mb-1 text-[24px]">home</span>
+<span class="text-[10px]">Home</span>
+</button>
+<!-- Search (Active - as user is exploring/searching for artist) -->
+<button class="flex flex-col items-center justify-center text-primary bg-primary/10 rounded-xl p-2 active:bg-white/10 tap-highlight-none scale-95 active:scale-90 transition-all w-16">
+<span class="material-symbols-outlined mb-1 text-[24px]" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="text-[10px]">Search</span>
+</button>
+<!-- Library (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 active:bg-white/10 tap-highlight-none scale-95 active:scale-90 rounded-xl transition-all w-16">
+<span class="material-symbols-outlined mb-1 text-[24px]">library_music</span>
+<span class="text-[10px]">Library</span>
+</button>
+<!-- Profile (Inactive) -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-2 active:bg-white/10 tap-highlight-none scale-95 active:scale-90 rounded-xl transition-all w-16">
+<span class="material-symbols-outlined mb-1 text-[24px]">person</span>
+<span class="text-[10px]">Profile</span>
+</button>
+</nav>
+</body></html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BeatMess - Search</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;800&amp;family=Hanken+Grotesk:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#35343a",
+                        "surface-container-high": "#2a292f",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary-fixed-dim": "#d0bcff",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-container-lowest": "#0e0e13",
+                        "on-secondary-fixed-variant": "#8c0053",
+                        "on-surface-variant": "#cbc3d7",
+                        "on-secondary": "#640039",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-primary-container": "#340080",
+                        "surface-tint": "#d0bcff",
+                        "inverse-surface": "#e4e1e9",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#35343a",
+                        "primary": "#d0bcff",
+                        "error-container": "#93000a",
+                        "background": "#131318",
+                        "outline-variant": "#494454",
+                        "secondary-fixed": "#ffd9e4",
+                        "on-tertiary-container": "#282a2a",
+                        "secondary": "#ffb0cd",
+                        "secondary-fixed-dim": "#ffb0cd",
+                        "on-tertiary": "#2f3131",
+                        "surface-bright": "#39383e",
+                        "on-secondary-container": "#ffbad3",
+                        "surface": "#131318",
+                        "error": "#ffb4ab",
+                        "secondary-container": "#aa0266",
+                        "primary-container": "#a078ff",
+                        "on-primary-fixed-variant": "#5516be",
+                        "outline": "#958ea0",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "primary-fixed": "#e9ddff",
+                        "on-background": "#e4e1e9",
+                        "tertiary-container": "#909191",
+                        "surface-container": "#1f1f25",
+                        "on-secondary-fixed": "#3e0022",
+                        "inverse-on-surface": "#303036",
+                        "on-primary-fixed": "#23005c",
+                        "inverse-primary": "#6d3bd7",
+                        "on-primary": "#3c0091",
+                        "surface-container-low": "#1b1b20",
+                        "on-error": "#690005",
+                        "surface-dim": "#131318",
+                        "tertiary": "#c6c6c7",
+                        "on-surface": "#e4e1e9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "48px",
+                        "split-right": "45%",
+                        "gutter": "24px",
+                        "split-left": "55%",
+                        "margin-mobile": "20px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Sora"],
+                        "display-lg-mobile": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "label-caps": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 0.5px solid rgba(255, 255, 255, 0.12);
+        }
+        .text-gradient {
+            background-image: linear-gradient(to right, var(--tw-colors-primary), var(--tw-colors-secondary));
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .bg-gradient-brand {
+            background-image: linear-gradient(to bottom right, var(--tw-colors-primary), var(--tw-colors-secondary));
+        }
+        
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface h-screen w-full overflow-hidden flex font-sans antialiased selection:bg-primary/30 selection:text-primary">
+<!-- Ambient Background Glow -->
+<div class="fixed top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-primary/10 blur-[120px] pointer-events-none mix-blend-screen"></div>
+<div class="fixed bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-secondary/10 blur-[120px] pointer-events-none mix-blend-screen"></div>
+<!-- SideNavBar (Shared Component JSON) -->
+<nav class="h-full w-[280px] fixed left-0 top-0 flex flex-col p-gutter bg-white/5 backdrop-blur-[20px] border-r-[0.5px] border-white/12 z-40">
+<!-- Header / Logo -->
+<div class="mb-12 mt-4 px-4">
+<h1 class="font-display-lg text-display-lg bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">BeatMess</h1>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 flex flex-col gap-2">
+<!-- Inactive: Home -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant font-body-lg text-body-lg hover:bg-white/10 transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">home</span>
+<span class="group-hover:text-on-surface transition-colors">Home</span>
+</a>
+<!-- Active: Explore (Maps to Search Intent) -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg bg-gradient-to-r from-primary/20 to-secondary/20 border-r-4 border-primary text-on-surface font-bold font-body-lg text-body-lg hover:bg-white/10 transition-colors scale-95 duration-200" href="#">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">search</span>
+<span>Explore</span>
+</a>
+<!-- Inactive: Library -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant font-body-lg text-body-lg hover:bg-white/10 transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">library_music</span>
+<span class="group-hover:text-on-surface transition-colors">Library</span>
+</a>
+<!-- Inactive: Premium -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-surface-variant font-body-lg text-body-lg hover:bg-white/10 transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-surface transition-colors">workspace_premium</span>
+<span class="group-hover:text-on-surface transition-colors">Premium</span>
+</a>
+</div>
+<!-- User Profile & CTA -->
+<div class="mt-auto pt-6 border-t-[0.5px] border-white/12 flex flex-col gap-4">
+<button class="w-full py-3 px-4 rounded-full bg-gradient-brand text-on-primary font-body-lg text-body-lg font-bold hover:opacity-90 transition-opacity">
+                Upgrade to Pro
+            </button>
+<div class="flex items-center gap-3 px-2 mt-2 cursor-pointer group">
+<div class="w-10 h-10 rounded-full overflow-hidden border-[0.5px] border-white/12 group-hover:border-primary/50 transition-colors">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A macro photography portrait of a cool DJ wearing futuristic sunglasses reflecting neon lights in a dark cyberpunk club environment. High contrast, sharp details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAufd1VuHCg7VQmalrxmYDO3z4CZxiaI-BS0CqwpMS-U0JqVVhih2GUdP2wgxf7M6xSKxZWsq4C8jbBIQ6Dm4EwhHOqL6bL0OvaP5YRdMnjnWDP6lZm5RD_ZdpiG5bMPDjRJMexJO3dnl29vtLcHiKbIfUxUr78MK7gA0BYt7GuoxORWvjxi-ayltv-IyztvF9Cz3mPiMO7sgcCefenpyaneVH8AEpfpDCrgXWcKqsbTVMZ2lXSxg41"/>
+</div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-bold group-hover:text-primary transition-colors">User Profile</span>
+<span class="font-label-caps text-label-caps text-primary/70">Premium Member</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-[280px] flex-1 flex flex-col h-full relative pb-24">
+<!-- TopNavBar (Integrated into content flow for desktop focus) -->
+<header class="w-full px-margin-desktop py-6 flex justify-end items-center sticky top-0 z-30 pointer-events-none">
+<div class="flex gap-4 pointer-events-auto">
+<button class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-white/10 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-white/10 transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Canvas -->
+<div class="flex-1 overflow-y-auto px-margin-desktop pb-12 pt-4">
+<!-- Search Header -->
+<div class="max-w-4xl mb-10">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-6 top-1/2 -translate-y-1/2 text-primary text-2xl z-10">search</span>
+<input class="w-full bg-white/5 backdrop-blur-[20px] border-[0.5px] border-white/12 rounded-full py-5 pl-16 pr-6 font-headline-md text-headline-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary transition-all shadow-lg shadow-black/20" placeholder="Search songs, artists, albums..." type="text" value="Neon"/>
+<!-- Glowing border effect on focus simulation -->
+<div class="absolute inset-0 rounded-full bg-primary/20 blur-md -z-10 opacity-50 group-focus-within:opacity-100 transition-opacity"></div>
+</div>
+<!-- Tab Switchers (Pills) -->
+<div class="flex gap-3 mt-8">
+<button class="px-6 py-2.5 rounded-full bg-gradient-brand text-on-primary font-label-caps text-label-caps shadow-[0_0_15px_rgba(208,188,255,0.3)] hover:opacity-90 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">music_note</span>
+                        Songs
+                    </button>
+<button class="px-6 py-2.5 rounded-full glass-panel text-on-surface-variant font-label-caps text-label-caps hover:bg-white/10 hover:text-on-surface transition-all">
+                        Albums
+                    </button>
+<button class="px-6 py-2.5 rounded-full glass-panel text-on-surface-variant font-label-caps text-label-caps hover:bg-white/10 hover:text-on-surface transition-all">
+                        Artists
+                    </button>
+<button class="px-6 py-2.5 rounded-full glass-panel text-on-surface-variant font-label-caps text-label-caps hover:bg-white/10 hover:text-on-surface transition-all">
+                        Playlists
+                    </button>
+</div>
+</div>
+<!-- 2-Column Results Layout -->
+<div class="flex gap-gutter w-full">
+<!-- Left Column (60%): Song List -->
+<div class="w-[60%] flex flex-col gap-2">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-4">Top Results</h2>
+<!-- Result Row 1 (Active/Hovered state simulation) -->
+<div class="flex items-center gap-4 p-3 rounded-2xl glass-panel bg-white/10 border-white/20 group cursor-pointer relative overflow-hidden transition-all">
+<!-- Active left border glow -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-l-2xl"></div>
+<div class="relative w-14 h-14 rounded-lg overflow-hidden shrink-0">
+<img alt="Neon Horizon Album Art" class="w-full h-full object-cover" data-alt="Abstract 3D render of glowing neon purple and pink geometric rings overlapping in a dark void. Futuristic album cover art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAh6cthluWJ3Y5RM8OEkGi2NDGSS8Go3cxNlTTP_4NUOBuZklfQP2k83m1nLDej_e5LiFd5qpLZbN2Gs4AWzRTY08-mQFiV-S8KdYglvL0hKqmWKFW0Q7L9MTa8lXqZpj3FyJQ3CCWujcM1JKNhHOQoPovQv_KhzJytgedsT4qU_NuLvGkGQ6J2wEVko9UTijmlj_URfKwNPsi5j0_3Ej4VGbpaS-y4egxx1AXNYV8qPUBv4abkeneg"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-body-lg text-body-lg text-primary font-bold truncate">Neon Horizon</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Syntax Error</p>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant px-4">
+                            3:45
+                        </div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<!-- Result Row 2 -->
+<div class="flex items-center gap-4 p-3 rounded-2xl border-[0.5px] border-transparent hover:border-white/12 hover:bg-white/5 transition-all group cursor-pointer">
+<div class="relative w-14 h-14 rounded-lg overflow-hidden shrink-0">
+<img alt="Neon Lights Album Art" class="w-full h-full object-cover" data-alt="A retro-futuristic synthwave landscape with a glowing digital sun setting over a dark grid grid terrain. Vibrant magenta and cyan colors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQe9TgHPBvUGEucnrmxzmOV_UNukU6op0lavLQzo_gu-UcLBAabMs391X0w9wlkARMRFuCBMskgMM6qKPfvVo_jlqzQ8nhFbUm3vB3GKHq0faE1B_h-lqjXXXKeWxOdDIGddPOt2TdGTbVNrbTumDnD_7kvzSMR2ogbI-3vfji5d462D0q5FkgRvlfaKzqA0Vben788p4A8GbQFMcbzWpbn9J-8bz5WF9srfBOVHSPlhpZ1Fn-ib_6"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold truncate group-hover:text-primary transition-colors">Neon Lights</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Cyber Drift</p>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant px-4">4:12</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<!-- Result Row 3 -->
+<div class="flex items-center gap-4 p-3 rounded-2xl border-[0.5px] border-transparent hover:border-white/12 hover:bg-white/5 transition-all group cursor-pointer">
+<div class="relative w-14 h-14 rounded-lg overflow-hidden shrink-0">
+<div class="w-full h-full bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">music_note</span>
+</div>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold truncate group-hover:text-primary transition-colors">Beyond Neon</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Void Walkers</p>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant px-4">2:58</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<!-- Result Row 4 -->
+<div class="flex items-center gap-4 p-3 rounded-2xl border-[0.5px] border-transparent hover:border-white/12 hover:bg-white/5 transition-all group cursor-pointer">
+<div class="relative w-14 h-14 rounded-lg overflow-hidden shrink-0">
+<img alt="Neon Rain Album Art" class="w-full h-full object-cover" data-alt="Raindrops hitting a glossy black surface reflecting neon blue and pink city lights. Moody, cinematic photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLGgCQUJ-NC-AQK7VARGOxMG96bEq1schHMjIM0MI7crpg6RpSxsyzCnWfLf-1JZfjmo_cqIvryOKjq5QmmVQ4RNSEV4SbO_wi6zeM7-TrAP2T87PukYiw_g6ccxocQFf0v6y4JdqobErh6QdQBCsee8AWT0Yi64tEFf6W6DRVGQzC14lSgjtBd3F19dhMJMHlyraMGoeOXE3yxTIhwWm97rQXbiNjP98FPWcW4JRVv8YKSlwzSkdN"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-body-lg text-body-lg text-on-surface font-semibold truncate group-hover:text-primary transition-colors">Neon Rain</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Synthia</p>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant px-4">5:01</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-white/10 transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Right Column (40%): Details/Preview Panel -->
+<div class="w-[40%]">
+<div class="glass-panel rounded-[24px] p-6 flex flex-col items-center sticky top-24 shadow-2xl shadow-black/50">
+<!-- Large Album Art -->
+<div class="w-full aspect-square rounded-[16px] overflow-hidden mb-6 relative group shadow-lg">
+<img alt="Neon Horizon Large Cover" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Abstract 3D render of glowing neon purple and pink geometric rings overlapping in a dark void. High clarity, frosted surface textures visible. Futuristic album cover art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNyAbi24cDvIaUUiJ-CDWQBIrxXVebrEUZrEW4hcS9NcMYucch3n83paHNlxOxTppwXugWojtpHVmGcj1kfBCn_wc1IPVzFYtBuZm0jiuqM-r38hiUfqNB_XaT-i053m8xk8suoqMoxNafyVirVJPDUcR295T7t_6aBDjbYiKUQa_4lnNbFX2z8GWBrGG8r-8u_UPTvaqEmUwkRRPRyNmIfjjbbsGRhOAPSnBwQ4UMA-zu-_QyD9sW"/>
+<!-- Overlay Play Button -->
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
+<button class="w-16 h-16 rounded-full bg-gradient-brand flex items-center justify-center text-on-primary shadow-[0_0_20px_rgba(208,188,255,0.5)] transform scale-90 group-hover:scale-100 transition-all">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+</div>
+<!-- Details -->
+<div class="text-center w-full mb-8">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold mb-1 truncate">Neon Horizon</h2>
+<p class="font-body-lg text-body-lg text-primary/80 truncate">Syntax Error</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Single • 2024 • Electronic</p>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-3 w-full">
+<button class="w-full py-3.5 rounded-full bg-gradient-brand text-on-primary font-body-lg text-body-lg font-bold flex items-center justify-center gap-2 hover:shadow-[0_0_15px_rgba(208,188,255,0.4)] transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                                Play Now
+                            </button>
+<button class="w-full py-3.5 rounded-full glass-panel text-on-surface font-body-lg text-body-lg flex items-center justify-center gap-2 hover:bg-white/10 transition-all border-white/20">
+<span class="material-symbols-outlined">favorite</span>
+                                Add to Library
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Mini-Player (Persistent) -->
+<div class="fixed bottom-0 left-[280px] right-0 h-24 glass-panel border-t-[0.5px] border-white/12 z-50 flex items-center px-8 justify-between shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+<!-- Track Info -->
+<div class="flex items-center gap-4 w-1/3">
+<div class="w-12 h-12 rounded-md overflow-hidden shadow-md">
+<img alt="Currently Playing Art" class="w-full h-full object-cover" data-alt="Abstract 3D render of glowing neon purple and pink geometric rings overlapping in a dark void. Small thumbnail format." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASebdjLCjoHR420CjeC87NviH4Zoo5abwGv4JhC0riIGm5Iw3ltGNdK-G02f_ThsvMNpDlo5TriPjV8lZGnnESkE3sra4qsUpdP76Jjk25varJuawOjnXMJEyoWzi0FHyX6bvp_R0_fP0iRVJp1GSbtU8EiiBMDB1nrhQ73IE33WIH8sb1PRCUcCoD36xpZflOCT8v0cH4nPORj9Vj25h5hoRQE3KJ6Xy8Alt4iJI3BAY4kMwp3OlF"/>
+</div>
+<div class="flex flex-col">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold hover:underline cursor-pointer">Neon Horizon</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant hover:underline cursor-pointer">Syntax Error</span>
+</div>
+<button class="ml-2 text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<!-- Player Controls -->
+<div class="flex flex-col items-center w-1/3 gap-2">
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]">shuffle</span>
+</button>
+<button class="text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">skip_previous</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-on-surface flex items-center justify-center text-surface hover:scale-105 transition-transform shadow-lg">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">pause</span>
+</button>
+<button class="text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">skip_next</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]">repeat</span>
+</button>
+</div>
+<!-- Progress Bar -->
+<div class="w-full max-w-md flex items-center gap-3">
+<span class="font-label-caps text-label-caps text-on-surface-variant">1:24</span>
+<div class="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden cursor-pointer group relative">
+<div class="h-full bg-gradient-brand w-1/3 rounded-full relative">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">3:45</span>
+</div>
+</div>
+<!-- Secondary Controls -->
+<div class="flex items-center justify-end gap-4 w-1/3 text-on-surface-variant">
+<button class="hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]">mic_external_on</span>
+</button>
+<button class="hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]">queue_music</span>
+</button>
+<button class="hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]">devices</span>
+</button>
+<div class="flex items-center gap-2 w-24 group cursor-pointer">
+<span class="material-symbols-outlined text-[20px] group-hover:text-on-surface transition-colors">volume_up</span>
+<div class="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-on-surface-variant group-hover:bg-primary transition-colors w-2/3 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</body></html>
