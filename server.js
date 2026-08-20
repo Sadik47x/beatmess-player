@@ -1746,10 +1746,11 @@ async function createServer() {
   });
 
   // Serve Frontend
-  if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(pathModule.join(__dirname, 'dist')));
+  const distPath = pathModule.join(__dirname, 'dist');
+  if (fs.existsSync(distPath)) {
+    app.use(express.static(distPath));
     app.get('*', (req, res) => {
-      res.sendFile(pathModule.join(__dirname, 'dist', 'index.html'));
+      res.sendFile(pathModule.join(distPath, 'index.html'));
     });
   } else {
     const vite = await createViteServer({
