@@ -33,7 +33,7 @@ export const SongRow: React.FC<SongRowProps> = ({ song, index, playlistId, sibli
   const handleLikeClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     toggleLike(song);
-    showToast(isLiked(song.id) ? 'Removed from Liked Songs' : 'Added to Liked Songs', 'info');
+    showToast(isLiked(song.id) ? 'Added to Liked Songs' : 'Removed from Liked Songs', 'info');
   };
 
   const handleAddToQueue = (e: React.MouseEvent) => {

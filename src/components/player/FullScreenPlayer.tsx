@@ -8,6 +8,8 @@ interface FullScreenPlayerProps {
   seekAudio: (sec: number) => void;
 }
 
+const isTouchDevice = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+
 export const FullScreenPlayer: React.FC<FullScreenPlayerProps> = ({ seekAudio }) => {
   const {
     queue,
@@ -79,7 +81,7 @@ export const FullScreenPlayer: React.FC<FullScreenPlayerProps> = ({ seekAudio })
 
   const handleLikeToggle = () => {
     toggleLike(song);
-    showToast(isLiked(song.id) ? 'Removed from Liked Songs' : 'Added to Liked Songs', 'info');
+    showToast(isLiked(song.id) ? 'Added to Liked Songs' : 'Removed from Liked Songs', 'info');
   };
 
   // Drag and Drop reordering logic
@@ -168,7 +170,7 @@ export const FullScreenPlayer: React.FC<FullScreenPlayerProps> = ({ seekAudio })
                 return (
                   <div
                     key={qSong.id + '-' + idx}
-                    draggable={true}
+                    draggable={!isTouchDevice}
                     onDragStart={(e) => handleDragStart(e, idx)}
                     onDragOver={(e) => handleDragOver(e, idx)}
                     onDrop={(e) => handleDrop(e, idx)}

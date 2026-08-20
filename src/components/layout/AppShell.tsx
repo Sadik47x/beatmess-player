@@ -395,7 +395,7 @@ export const AppShell: React.FC = () => {
                   <button
                     onClick={() => {
                       toggleLike(activeSong);
-                      showToast(isLiked(activeSong.id) ? 'Removed from Liked Songs' : 'Added to Liked Songs', 'info');
+                      showToast(isLiked(activeSong.id) ? 'Added to Liked Songs' : 'Removed from Liked Songs', 'info');
                     }}
                     className={`p-2 rounded-full hover:bg-white/5 active:scale-95 duration-200 transition-transform ${
                       liked ? 'text-accent-pink' : 'text-on-surface-variant hover:text-on-surface'
