@@ -844,12 +844,28 @@ async function createServer() {
   // Make sure local yt-dlp binary is downloaded on boot
   await ensureYtdlp();
 
+  // Memory Cache for search queries and trending charts
+  const searchCache = new Map();
+  const CACHE_TTL = 30 * 60 * 1000; // 30 minutes in milliseconds
+  let trendingCache = null;
+  let trendingCacheTime = 0;
+
   // Trending Top Charts API Endpoint
   app.get('/api/trending', async (req, res) => {
+    if (trendingCache && (Date.now() - trendingCacheTime < CACHE_TTL)) {
+      console.log('[Trending Cache] Hit - Serving top charts from memory');
+      return res.json(trendingCache);
+    }
     console.log(`\n--- [Trending Gateway] Loading Apple Music India Top Charts ---`);
     const results = await fetchTrendingCharts();
     if (results.length > 0) {
+      trendingCache = results;
+      trendingCacheTime = Date.now();
       return res.json(results);
+    }
+    if (trendingCache) {
+      console.log('[Trending Cache] Serving expired cache as fallback');
+      return res.json(trendingCache);
     }
     return res.status(503).json({ error: 'Trending charts are temporarily unavailable.' });
   });
@@ -862,6 +878,20 @@ async function createServer() {
     if (!query) {
       return res.status(400).json({ error: 'Query parameter "q" is required' });
     }
+
+    const cacheKey = `${source}:${query.trim().toLowerCase()}`;
+    if (searchCache.has(cacheKey)) {
+      const entry = searchCache.get(cacheKey);
+      if (Date.now() - entry.timestamp < CACHE_TTL) {
+        console.log(`[Search Cache] Hit for query: "${query}" (${source})`);
+        return res.json(entry.data);
+      }
+    }
+
+    const sendCachedJson = (res, key, data) => {
+      searchCache.set(key, { timestamp: Date.now(), data });
+      return res.json(data);
+    };
 
     console.log(`\n--- [Search Gateway] Raw Query: "${query}", Source: "${source}" ---`);
 
@@ -941,7 +971,7 @@ async function createServer() {
         });
       }
 
-      return res.json({ status: 'ok', provider: successProvider, results });
+      return sendCachedJson(res, cacheKey, { status: 'ok', provider: successProvider, results });
     } else {
       // YouTube explicit search (Primary: Local yt-dlp -> Fallback: Piped -> Fallback 2: Invidious)
       let results = [];
@@ -984,7 +1014,7 @@ async function createServer() {
         }
       }
 
-      return res.json({ status: 'ok', provider: successProvider, results });
+      return sendCachedJson(res, cacheKey, { status: 'ok', provider: successProvider, results });
     }
   });
 

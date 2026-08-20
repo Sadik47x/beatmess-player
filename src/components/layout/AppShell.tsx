@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUIStore } from '../../stores/uiStore';
 import type { TabType } from '../../stores/uiStore';
 import { usePlayerStore } from '../../stores/playerStore';
@@ -53,6 +53,50 @@ export const AppShell: React.FC = () => {
   const [showOnboarding, setShowOnboarding] = useState(
     !localStorage.getItem('beatmess-onboarded') && useLibraryStore.getState().history.length === 0
   );
+
+  // Back button and history management for mobile navigation
+  useEffect(() => {
+    // Replace initial state with home tab
+    if (!window.history.state) {
+      window.history.replaceState({ tab: 'home', fullScreen: false }, '', '#home');
+    }
+
+    const handlePopState = (e: PopStateEvent) => {
+      if (e.state) {
+        usePlayerStore.getState().setFullScreenOpen(!!e.state.fullScreen);
+        if (e.state.tab) {
+          useUIStore.getState().setActiveTab(e.state.tab);
+        }
+      } else {
+        usePlayerStore.getState().setFullScreenOpen(false);
+        useUIStore.getState().setActiveTab('home');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Sync tab change to history
+  useEffect(() => {
+    if (window.history.state && window.history.state.tab !== activeTab) {
+      window.history.pushState({ tab: activeTab, fullScreen: false }, '', `#${activeTab}`);
+    }
+  }, [activeTab]);
+
+  // Sync fullscreen player open/close to history
+  const isFullScreenOpen = usePlayerStore(state => state.isFullScreenOpen);
+  useEffect(() => {
+    if (isFullScreenOpen) {
+      if (!window.history.state?.fullScreen) {
+        window.history.pushState({ tab: activeTab, fullScreen: true }, '', '#player');
+      }
+    } else {
+      if (window.history.state?.fullScreen) {
+        window.history.back();
+      }
+    }
+  }, [isFullScreenOpen, activeTab]);
 
   const activeSong = currentIndex >= 0 && currentIndex < queue.length ? queue[currentIndex] : null;
 

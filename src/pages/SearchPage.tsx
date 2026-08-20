@@ -48,7 +48,6 @@ export const SearchPage: React.FC = () => {
     if (!searchQuery.trim()) return;
     setLoading(true);
     setSearched(true);
-    setShowSuggestions(false);
     setErrorMsg(null); // Clear previous error
     try {
       let searchResults: Song[] = [];
