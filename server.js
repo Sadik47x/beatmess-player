@@ -463,6 +463,23 @@ function getGenreEraQuery(title, artist, album, year, language) {
   const lang = (language || 'Hindi').toLowerCase();
   const y = parseInt(year, 10);
 
+  // 0.1 Devotional / Spiritual
+  if (t.includes('bhajan') || t.includes('aarti') || t.includes('chalisa') || t.includes('mantra') || t.includes('devotional') || t.includes('shiva') || t.includes('krishna') || t.includes('hanuman') || t.includes('spiritual') || al.includes('bhajan') || al.includes('devotional') || t.includes('stotram') || t.includes('sloka')) {
+    return 'Hindi Devotional Bhajans';
+  }
+  // 0.2 Bhojpuri
+  if (lang === 'bhojpuri' || t.includes('bhojpuri') || a.includes('khesari') || a.includes('pawan singh') || a.includes('nirahua') || a.includes('akshara') || al.includes('bhojpuri')) {
+    return 'Bhojpuri Hits Songs';
+  }
+  // 0.3 Haryanvi
+  if (t.includes('haryanvi') || a.includes('sapna') || a.includes('gulzaar chhaniwala') || al.includes('haryanvi')) {
+    return 'Haryanvi Hits Songs';
+  }
+  // 0.4 Ghazals / Sufi
+  if (t.includes('ghazal') || t.includes('sufi') || a.includes('jagjit singh') || a.includes('nusrat') || a.includes('pankaj udhas') || al.includes('ghazal') || al.includes('sufi')) {
+    return 'Jagjit Singh Ghazals Sufi Songs';
+  }
+
   // 1. Lofi / Chillout
   if (t.includes('lofi') || t.includes('chill') || al.includes('lofi') || al.includes('chill')) {
     return 'Lofi Chill Chillout Beats';
@@ -1654,9 +1671,24 @@ async function createServer() {
         });
       };
 
+      // Helper to resolve charts song to a real JioSaavn ID for suggestions query
+      let queryId = id;
+      if (id.startsWith('saavn-charts-')) {
+        try {
+          console.log(`[Curation] Resolving charts song "${title}" by "${artist}" to JioSaavn ID...`);
+          const searchResults = await trySaavnSearch(`${title} ${artist}`);
+          if (searchResults.length > 0) {
+            queryId = searchResults[0].id;
+            console.log(`[Curation] Resolved charts song to real JioSaavn ID: ${queryId}`);
+          }
+        } catch (e) {
+          console.warn('[Curation] Failed to resolve charts song to JioSaavn ID:', e.message);
+        }
+      }
+
       // 1. Fetch direct recommendations first (Highest quality source)
-      if (id.startsWith('yt-')) {
-        const videoId = id.replace('yt-', '');
+      if (queryId.startsWith('yt-')) {
+        const videoId = queryId.replace('yt-', '');
         try {
           const directYt = await getRelatedYoutubeTracks(videoId);
           console.log(`[Curation] Fetched ${directYt.length} direct YouTube related tracks`);
@@ -1666,7 +1698,8 @@ async function createServer() {
         }
       } else {
         try {
-          const directSaavn = await trySaavnSuggestions(id);
+          const cleanId = queryId.replace('saavn-', '');
+          const directSaavn = await trySaavnSuggestions(cleanId);
           console.log(`[Curation] Fetched ${directSaavn.length} direct JioSaavn recommendations`);
           addCandidates(directSaavn);
         } catch (e) {
@@ -1675,26 +1708,26 @@ async function createServer() {
       }
 
       // 2. Fetch genre/era and artist search results to guarantee high candidate volume
-      if (id.startsWith('yt-')) {
-        try {
-          const genreYt = await tryYtdlpSearch(currentGenreQuery);
-          addCandidates(genreYt);
-        } catch (e) {
-          console.warn('[Curation] Genre YouTube search failed:', e.message);
-        }
-      } else {
-        try {
-          const genreSaavn = await trySaavnSearch(currentGenreQuery);
-          addCandidates(genreSaavn);
-        } catch (e) {
-          console.warn('[Curation] Genre JioSaavn search failed:', e.message);
-        }
-        try {
-          const artistSaavn = await trySaavnSearch(artist);
-          addCandidates(artistSaavn);
-        } catch (e) {
-          console.warn('[Curation] Artist JioSaavn search failed:', e.message);
-        }
+      // We search both JioSaavn AND YouTube to ensure a rich, robust candidate pool
+      try {
+        const genreSaavn = await trySaavnSearch(currentGenreQuery);
+        addCandidates(genreSaavn);
+      } catch (e) {
+        console.warn('[Curation] Genre JioSaavn search failed:', e.message);
+      }
+      
+      try {
+        const artistSaavn = await trySaavnSearch(artist);
+        addCandidates(artistSaavn);
+      } catch (e) {
+        console.warn('[Curation] Artist JioSaavn search failed:', e.message);
+      }
+
+      try {
+        const genreYt = await tryYtdlpSearch(currentGenreQuery);
+        addCandidates(genreYt);
+      } catch (e) {
+        console.warn('[Curation] Genre YouTube search failed:', e.message);
       }
 
       // 3. Inject user preferences (Liked songs and general trending songs as fallback/discovery)
